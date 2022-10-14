@@ -17,7 +17,7 @@ Rectangle {
             anchors.margins: 0
             AreaGraphCompoundComponent
             {
-                id: areaSeriesOneGraph
+                id: grainLossGraph
                 Layout.fillWidth: true
                 Layout.preferredWidth: parent.width
                 Layout.maximumWidth: parent.width
@@ -29,69 +29,55 @@ Rectangle {
                 Connections
                 {
                     target: pfcData
-                    onAreaSeriesOneUpperValueChanged:
+                    onGrainLossBackgroundDataValueChanged:
                     {
-                       areaSeriesOneGraph.onBackgroundDataChanged(pfcData.areaSeriesOneUpperValue.x, pfcData.areaSeriesOneUpperValue.y, pfcData.areaSeriesOneMaxValue)
+                       grainLossGraph.onBackgroundDataChanged(pfcData.grainLossBackgroundDataValue.x, pfcData.grainLossBackgroundDataValue.y, pfcData.grainLossMaxValue)
                     }
-                    onAreaSeriesOneLowerValueChanged:
+                    onGrainLossForegroundDataValueChanged:
                     {
-                       areaSeriesOneGraph.onForegroundDataChanged(pfcData.areaSeriesOneLowerValue.x, pfcData.areaSeriesOneLowerValue.y, pfcData.areaSeriesOneMaxValue)
+                       grainLossGraph.onForegroundDataChanged(pfcData.grainLossForegroundDataValue.x, pfcData.grainLossForegroundDataValue.y, pfcData.grainLossMaxValue)
                     }
                 }
             }
             AreaGraphCompoundComponent
             {
-                id: areaSeriesTwoGraph
+                id: foreignMaterialGraph
                 Layout.fillWidth: true
                 Layout.preferredWidth: parent.width
                 Layout.maximumWidth: parent.width
                 Layout.minimumHeight: parent.height / 3 - 5
-                graphBackgroundDataColor: "lightblue"
-                graphForegroundDataColor: "blue"
-                graphBackgroundDataName: "Separator Loss"
-                graphForegroundDataName: "Grain Loss"
+                graphForegroundDataColor: "lightblue"
+                graphForegroundDataName: "Foreign Material"
                 Connections
                 {
                     target: pfcData
-                    onAreaSeriesOneUpperValueChanged:
+                    onForeignMaterialValueChanged:
                     {
-                       areaSeriesTwoGraph.onBackgroundDataChanged(pfcData.areaSeriesTwoUpperValue.x, pfcData.areaSeriesTwoUpperValue.y, pfcData.areaSeriesTwoMaxValue)
-                    }
-                    onAreaSeriesOneLowerValueChanged:
-                    {
-                       areaSeriesTwoGraph.onForegroundDataChanged(pfcData.areaSeriesTwoLowerValue.x, pfcData.areaSeriesTwoLowerValue.y, pfcData.areaSeriesTwoMaxValue)
+                       foreignMaterialGraph.onForegroundDataChanged(pfcData.foreignMaterialValue.x, pfcData.foreignMaterialValue.y, pfcData.foreignMaterialMaxValue)
                     }
                 }
             }
-            LineGraphCompoundComponent
+            AreaGraphCompoundComponent
             {
-                id: lineSeriesGraph
+                id: brokenGrainGraph
                 Layout.fillWidth: true
                 Layout.preferredWidth: parent.width
                 Layout.maximumWidth: parent.width
                 Layout.minimumHeight: parent.height / 3 - 5
-                graphDataColor: "tomato"
-                graphDataName: "Power Target"
-                graphData2Color: "lightblue"
-                graphData2Name: "Power Rate"
+                graphForegroundDataColor: "tomato"
+                graphForegroundDataName: "Broken Grain"
                 Connections
                 {
                     target: pfcData
-                    onLineSeriesOneValueChanged:
+                    onBrokenGrainValueChanged:
                     {
-                       lineSeriesGraph.onDataOneChanged(pfcData.lineSeriesOneValue.x, pfcData.lineSeriesOneValue.y, pfcData.lineSeriesOneMax)
-                    }
-                    onLineSeriesTwoValueChanged:
-                    {
-                       lineSeriesGraph.onDataTwoChanged(pfcData.lineSeriesTwoValue.x, pfcData.lineSeriesTwoValue.y, pfcData.lineSeriesOneMax)
+                       brokenGrainGraph.onForegroundDataChanged(pfcData.brokenGrainValue.x, pfcData.brokenGrainValue.y, pfcData.brokenGrainMaxValue)
                     }
                 }
             }
-     }
+        }
+    }
 }
-}
-
-
 
 /*##^##
 Designer {

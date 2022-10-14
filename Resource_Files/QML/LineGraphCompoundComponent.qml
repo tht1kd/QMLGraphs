@@ -10,6 +10,7 @@ Row {
     property alias graphDataName: graph.dataName
     property alias graphData2Color: graph.data2Color
     property alias graphData2Name: graph.data2Name
+    property alias series1: graph.series1
     //////////////////////////////////////////////////////
     /// Sizing
     //////////////////////////////////////////////////////
@@ -44,6 +45,7 @@ Row {
             id: row
             anchors.fill: parent
             spacing: 16
+            y: graph.y / 5
             Column {
                 id: maxAcceptableInput
                 height: parent.height
@@ -88,9 +90,6 @@ Row {
         }
         Rectangle {
             id: indicatorLine
-            anchors.left: numberBox.right
-            anchors.right: parent.right
-            anchors.top: parent.top
             anchors.topMargin: (numberBox.height / 2) + spacer.height + 4
             color: numberBox.border.color
             height: 2

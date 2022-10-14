@@ -11,13 +11,13 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core Widgets Quick)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Widgets Quick)
+find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core Widgets Quick Charts)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Widgets Quick Charts)
 
 set(PROJECT_SOURCES
         main.cpp
-        PFCQMLMainDialog.cpp
-        PFCQMLMainDialog.h
+        QMLDialog.cpp
+        QMLDialog.h
         QML.qrc
 )
 
@@ -44,7 +44,7 @@ else()
     endif()
 endif()
 
-target_link_libraries(QMLGraphs PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick)
+target_link_libraries(QMLGraphs PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick Qt${QT_VERSION_MAJOR}::Charts)
 
 set_target_properties(QMLGraphs PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com

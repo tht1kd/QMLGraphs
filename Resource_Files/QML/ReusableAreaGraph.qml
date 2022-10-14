@@ -25,25 +25,32 @@ Rectangle {
 
     function deleteOldData(series)
     {
-        if(series.count > 30)
+        if(series.count >=30)
         {
-           series.remove(0);
+            series.remove(0);
+        }
+        if(series.count === 0)
+        {
+            for(var index = 0; index < 30; ++index)
+            {
+                series.append(index,-1)
+            }
         }
     }
     function setNewData(series, newX, newY, maxData)
     {
-        series.append(newX, newY)
+        series.append(newX+30, newY)
         valueXAxis.min = series.at(0).x
         valueXAxis.max = series.at(series.count-1).x
         valueYAxis.max = maxData
-        updateXAxis(newX)
+        updateXAxis(30)
     }
     function updateXAxis(newX)
     {
         var maxAxisValue = getAxisValue(newX, false);
         var midAxisValue = getAxisValue(newX, true);
         axisMaxLegend.text = maxAxisValue + getAxisUnit(maxAxisValue)
-        axisMidLegend.text = midAxisValue + getAxisUnit(midAxisValue)
+        axisMidLegend.text = midAxisValue
     }
     function getAxisValue(newXValue, isMidpoint)
     {
@@ -64,7 +71,7 @@ Rectangle {
         margins.bottom: 0
         margins.left: 0
         margins.right: 0
-        legend.alignment: Qt.AlignBottom
+        legend.visible: false
         ValueAxis
         {
             id: valueXAxis
@@ -109,7 +116,6 @@ Rectangle {
             x: chartView.plotArea.x
             y: chartView.plotArea.y + chartView.plotArea.height + 5
             width: chartView.plotArea.width
-            anchors.horizontalCenter: chartView.plotArea.Center
             height: 20
             Rectangle
             {
@@ -144,7 +150,7 @@ Rectangle {
                 width: 150
                 Text
                 {
-                    text: "0 min"
+                    text: "0"
                     anchors.fill: parent
                     horizontalAlignment: Text.AlignRight
                 }

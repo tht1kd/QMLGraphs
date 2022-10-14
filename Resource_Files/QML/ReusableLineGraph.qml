@@ -24,18 +24,25 @@ Rectangle {
     color: chartView.backgroundColor
     function deleteOldData(series)
     {
-        if(series.count > 30)
+        if(series.count >=30)
         {
-           series.remove(0);
+            series.remove(0);
+        }
+        if(series.count === 0)
+        {
+            for(var index = 0; index < 30; ++index)
+            {
+                series.append(index,-1)
+            }
         }
     }
     function setNewData(series, newX, newY, newMaxValue)
     {
-        series.append(newX, newY)
+        series.append(newX+30, newY)
         valueXAxis.min = series.at(0).x
         valueXAxis.max = series.at(series.count-1).x
         valueYAxis.max = newMaxValue
-        updateXAxis(newX)
+        updateXAxis(30)
     }
     function updateXAxis(newX)
     {

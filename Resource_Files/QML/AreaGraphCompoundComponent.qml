@@ -6,7 +6,9 @@ Row {
     //////////////////////////////////////////////////////
     // Properties
     //////////////////////////////////////////////////////
+    property alias graphBackgroundDataBrush: graph.backgroundDataBrush
     property alias graphBackgroundDataColor: graph.backgroundDataColor
+    property alias graphForegroundDataBrush: graph.foregroundDataBrush
     property alias graphForegroundDataColor: graph.foregroundDataColor
     property alias graphBackgroundDataName: graph.backgroundDataName
     property alias graphForegroundDataName: graph.foregroundDataName

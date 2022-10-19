@@ -6,8 +6,10 @@ Rectangle {
     //////////////////////////////////////////////////////
     // Properties
     //////////////////////////////////////////////////////
+    property alias backgroundDataBrush: backgroundData.brushFilename
     property alias backgroundDataColor: backgroundData.color
-    property alias foregroundDataColor: backgroundData.color
+    property alias foregroundDataBrush: foregroundData.brushFilename
+    property alias foregroundDataColor: foregroundData.color
     property alias backgroundDataName: backgroundData.name
     property alias foregroundDataName: foregroundData.name
     property alias backgroundData: backgroundData.upperSeries
@@ -102,9 +104,7 @@ Rectangle {
             name: backgroundDataName
             axisX: valueXAxis
             axisYRight: valueYAxis
-            brushFilename: ":/PFCApp/Resource_Files/Images/graph_fill_pattern.svg"
             borderColor: "#BFBD99"
-
             upperSeries: LineSeries {}
         }
         AreaSeries
@@ -113,8 +113,6 @@ Rectangle {
             name: foregroundDataName
             axisX: valueXAxis
             axisYRight: valueYAxis
-//            brushFilename: foregroundDataColor
-//            color: foregroundDataColor
             borderColor: "#D7D4B8"
             upperSeries: LineSeries {}
         }

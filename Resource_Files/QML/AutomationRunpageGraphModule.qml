@@ -17,8 +17,8 @@ Rectangle {
             AreaGraphCompoundComponent
             {
                 id: grainLossGraph
-                graphBackgroundDataColor: brushfactory.brushFromColor(color("#D7D4B8"))
-                graphForegroundDataColor: brushfactory.brushFromColor(color("#BFBD99"))
+                graphBackgroundDataBrush: ":/PFCApp/Resource_Files/Images/graph_fill_pattern.svg"
+                graphForegroundDataColor: "#D7D4B8"
                 graphBackgroundDataName: "MOG Light"
                 graphForegroundDataName: "MOG Heavy"
                 graphName: "Grain Loss"
@@ -40,7 +40,7 @@ Rectangle {
             {
                 id: foreignMaterialGraph
                 Layout.fillWidth: true
-                graphForegroundDataColor: Brushfactory.brushFromColor(color("#BFBD99"))
+                graphForegroundDataColor: "#D7D4B8"
                 graphForegroundDataName: "Foreign Material"
                 graphName: "Foreign Material"
                 Connections
@@ -55,7 +55,7 @@ Rectangle {
             AreaGraphCompoundComponent
             {
                 id: brokenGrainGraph
-                graphForegroundDataColor: brushfactory.brushFromColor(color("#BFBD99"))
+                graphForegroundDataColor: "#D7D4B8"
                 graphForegroundDataName: "Broken Grain"
                 graphName: "Broken Grain"
                 Connections

@@ -22,6 +22,7 @@ Rectangle {
     //////////////////////////////////////////////////////
     id: root
     color: chartView.backgroundColor
+    baselineOffset: 0
 
     function deleteOldData(series)
     {
@@ -43,14 +44,15 @@ Rectangle {
         valueXAxis.min = series.at(0).x
         valueXAxis.max = series.at(series.count-1).x
         valueYAxis.max = maxData
+        axisYMaxLegend.text = (maxData).toFixed(1);
         updateXAxis(30)
     }
     function updateXAxis(newX)
     {
         var maxAxisValue = getAxisValue(newX, false);
         var midAxisValue = getAxisValue(newX, true);
-        axisMaxLegend.text = maxAxisValue + getAxisUnit(maxAxisValue)
-        axisMidLegend.text = midAxisValue + getAxisUnit(midAxisValue)
+        axisMidLegend.text = midAxisValue
+        axisMaxLegend.text = maxAxisValue + getAxisUnit(midAxisValue)
     }
     function getAxisValue(newXValue, isMidpoint)
     {
@@ -68,11 +70,9 @@ Rectangle {
         backgroundRoundness: 0
         backgroundColor: "transparent"
         legend.visible: false
-        anchors { fill: parent; margins: -12 }
+        anchors { fill: parent; centerIn: parent; margins: -15}
         margins { right: 0; bottom: 0; left: 0; top: 0 }
-        //animationOptions: ChartView.SeriesAnimations
-        //legend.alignment: Qt.AlignBottom
-
+//        animationOptions: ChartView.SeriesAnimations
         ValueAxis
         {
             id: valueXAxis
@@ -162,9 +162,44 @@ Rectangle {
                 color: "transparent"
                 Text
                 {
-                    text: "0 min"
+                    text: "0"
                     anchors.fill: parent
                     horizontalAlignment: Text.AlignRight
+                }
+            }
+        }
+
+        Column
+        {
+            id: valueYAxisLegendLayout
+            x: chartView.plotArea.x + chartView.plotArea.width + 4
+            y: chartView.plotArea.y - 8
+            width: 50
+            anchors.horizontalCenter: chartView.plotArea.Center
+            height: chartView.plotArea.height + 8
+            Rectangle
+            {
+                height: 20
+                anchors.top: parent.top
+                width: parent.width
+                color: "transparent"
+                Text
+                {
+                    id: axisYMaxLegend
+                    anchors.fill: parent
+                    verticalAlignment: Text.AlignTop
+                }
+            }
+            Rectangle
+            {
+                anchors.bottom: parent.bottom
+                height: 20
+                width: parent.width
+                color: "transparent"
+                Text
+                {
+                    text: "0"
+                    anchors.fill: parent
                 }
             }
         }

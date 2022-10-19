@@ -57,7 +57,7 @@ Row {
                 }
                 Rectangle {
                     id: numberBox
-                    anchors.horizontalCenter: parent.horizontalCenter
+//                    anchors.horizontalCenter: parent.horizontalCenter
                     border.color: graphForegroundDataColor
                     border.width: 2
                     height: numberText.implicitHeight + 8
@@ -80,35 +80,37 @@ Row {
                     width: parent.width
                 }
             }
-            ReusableAreaGraph
-            {
-                id: graph
-                anchors.bottom: boundary.bottom
-                width: boundary.width
-                height: boundary.height
-                parent: boundary
+            Rectangle {
+                id: boundary
+                anchors.left: numberBox.right
+                anchors.right: parent.right
+                anchors.top: parent.top
+                border.color: "black"
+                color: "transparent"
+                height: 97
+                width: root.width / 2
+                ReusableAreaGraph
+                {
+                    id: graph
+                    width: boundary.width
+                    height: boundary.height
+                    parent: boundary
+
+                }
             }
+            Rectangle {
+                id: indicatorLine
+                anchors.left: numberBox.right
+                anchors.right: boundary.right
+                anchors.top: boundary.top
+                anchors.topMargin: boundary.height - boundary.height/1.2
+                color: numberBox.border.color
+                height: 2
+                width: graph.width + row.spacing + 8
+            }
+
         }
-        Rectangle {
-            id: boundary
-            anchors.left: numberBox.right
-            anchors.right: parent.right
-            anchors.top: parent.top
-            border.color: "black"
-            color: "transparent"
-            height: 97
-            width: root.width / 2
-        }
-        Rectangle {
-            id: indicatorLine
-            anchors.left: numberBox.right
-            anchors.right: boundary.right
-            anchors.top: boundary.top
-            anchors.topMargin: boundary.height - boundary.height/1.2
-            color: numberBox.border.color
-            height: 2
-            width: graph.width + row.spacing + 8
-        }
+
     }
     Column {
         id: rightContainer

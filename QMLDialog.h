@@ -15,6 +15,8 @@ class QMLDialog : public QDialog
     Q_PROPERTY(double brokenGrainMaxValue READ GetBrokenGrainMaxValue CONSTANT)
     Q_PROPERTY(QPointF foreignMaterialValue READ GetForeignMaterialValue NOTIFY foreignMaterialValueChanged)
     Q_PROPERTY(double foreignMaterialMaxValue READ GetForeignMaterialMaxValue CONSTANT)
+    Q_PROPERTY(QPointF productivityValue READ GetProductivityValue NOTIFY productivityValueChanged)
+    Q_PROPERTY(double productivityMaxValue READ GetProductivityMaxValue CONSTANT)
 
 public:
     QMLDialog(QWidget *parent = nullptr);
@@ -30,15 +32,17 @@ public:
     QPointF GetForeignMaterialValue() const {return ForeignMaterialDataValue;}
     double GetForeignMaterialMaxValue() const {return ForeignMaterialMaxValue;}
 
+    QPointF GetProductivityValue() const { return ProductivityDataValue;}
+    double GetProductivityMaxValue() const {return ProductivityMaxValue;}
+
 signals:
     void grainLossBackgroundDataValueChanged();
     void grainLossForegroundDataValueChanged();
     void foreignMaterialValueChanged();
     void areaSeriesTwoLowerValueChanged();
     void brokenGrainValueChanged();
-    void lineSeriesTwoValueChanged();
-    void lineSeriesOneMaxChanged();
-    void mainLineSeriesChanged();
+    void productivityValueMaxChanged();
+    void productivityValueChanged();
 
 private slots:
     void GraphDataTimeout();
@@ -51,14 +55,17 @@ private:
     void CalculateBrokenGrainMaxValue();
     void CalculateGrainLossMaxValue();
     void CalculateForeignMaterialMaxValue();
+    void CalculateProductivityMaxValue();
 
     QTimer* GraphDataTimer;
     QWidget* QMLContainer = nullptr;
     QPointF BrokenGrainDataPoint;
-    double BrokenGrainMaxValue=1.2;
+    double BrokenGrainMaxValue = 1.2;
     QPointF GrainLossBackgroundDataValue;
     QPointF GrainLossForegroundDataValue;
-    double GrainLossMaxValue=1.2;
+    double GrainLossMaxValue = 1.2;
     QPointF ForeignMaterialDataValue;
-    double ForeignMaterialMaxValue=1.2;
+    double ForeignMaterialMaxValue = 1.2;
+    QPointF ProductivityDataValue;
+    double ProductivityMaxValue = 1.2;
 };

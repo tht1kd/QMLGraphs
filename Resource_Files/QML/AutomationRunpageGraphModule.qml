@@ -2,10 +2,10 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.3
 
-Rectangle {
-    id: root
-    color: "#F1EFE4"
-    border.color: "#ffffff"
+//Rectangle {
+//    id: root
+//    color: "#F1EFE4"
+//    border.color: "#ffffff"
     Rectangle
     {
         anchors.fill: parent
@@ -14,9 +14,50 @@ Rectangle {
         {
             id: layout
             anchors.fill: parent
+            Layout.leftMargin: 8
+            LineGraphCompoundComponent
+            {
+                id: productivityGraph
+                graphDataColor: "black"
+                Connections
+                {
+                    target: pfcData
+                    onProductivityValueChanged:
+                    {
+                       productivityGraph.onDataOneChanged(pfcData.productivityDataValue.x, pfcData.productivityDataValue.y, pfcData.productivityMaxValue)
+                    }
+                }
+            }
+            Rectangle
+            {
+                id: productivityDivider
+                color: "#BFBD99"
+                Layout.fillWidth: true
+                height: productivityDividerText.implicitHeight
+                Text
+                {
+                    id: productivityDividerText
+                    anchors.centerIn: parent
+                    text: "Productivity"
+                }
+            }
+            Rectangle
+            {
+                id: qualityDivider
+                color: "#BFBD99"
+                Layout.fillWidth: true
+                height: qualityDividerText.implicitHeight
+                Text
+                {
+                    id: qualityDividerText
+                    anchors.centerIn: parent
+                    text: "Job Quality"
+                }
+            }
             AreaGraphCompoundComponent
             {
                 id: grainLossGraph
+                Layout.fillWidth: true
                 graphBackgroundDataBrush: ":/PFCApp/Resource_Files/Images/graph_fill_pattern.svg"
                 graphForegroundDataColor: "#D7D4B8"
                 graphBackgroundDataName: "MOG Light"
@@ -55,6 +96,7 @@ Rectangle {
             AreaGraphCompoundComponent
             {
                 id: brokenGrainGraph
+                Layout.fillWidth: true
                 graphForegroundDataColor: "#D7D4B8"
                 graphForegroundDataName: "Broken Grain"
                 graphName: "Broken Grain"
@@ -69,7 +111,7 @@ Rectangle {
             }
         }
     }
-}
+//}
 
 /*##^##
 Designer {

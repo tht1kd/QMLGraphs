@@ -10,10 +10,10 @@ namespace
 }
 
 //TODO: correctly instantiate with different data // DONE!
-//TODO: be able to dynamically createSeries within components, so that can reuse.
 //TODO: be able to update "numbers" data from CompoundComponent. //DONE!
 //TODO: be able to open overlay in QML for changing max.
-//TODO: test gradients.
+//TODO: create productivity section
+//TODO: Cleaup QML
 
 QMLDialog::QMLDialog(QWidget *parent)
     : QDialog(parent)
@@ -57,6 +57,11 @@ void QMLDialog::GraphDataTimeout()
     ForeignMaterialDataValue.setY(RandomNumberGenerator(0, 0.5));
     CalculateForeignMaterialMaxValue();
     emit foreignMaterialValueChanged();
+
+    ProductivityDataValue.setX(ProductivityDataValue.x()+1);
+    ProductivityDataValue.setY((RandomNumberGenerator(0, 50)));
+    CalculateProductivityMaxValue();
+    emit productivityValueChanged();
 }
 
 void QMLDialog::resizeEvent(QResizeEvent *event)
@@ -85,3 +90,7 @@ void QMLDialog::CalculateForeignMaterialMaxValue()
     ForeignMaterialMaxValue = qMax(ForeignMaterialMaxValue, (double)ForeignMaterialDataValue.y());
 }
 
+void QMLDialog::CalculateProductivityMaxValue()
+{
+    ProductivityMaxValue = qMax(ProductivityMaxValue, (double)ProductivityDataValue.y());
+}

@@ -93,7 +93,8 @@ Row {
                 anchors.verticalCenter: indicatorLine.verticalCenter
                 x: indicatorLine.x - 50
             }
-            Rectangle {
+            Rectangle
+            {
                 id: indicatorLine
                 anchors.left: numberBox.right
                 anchors.right: graphBoundaryBox.right
@@ -105,23 +106,28 @@ Row {
             }
         }
     }
-    RowLayout{
+    RowLayout
+    {
        spacing: 8
-        Image {
+        Image
+        {
             source: "qrc:///PFCApp/Resource_Files/Images/SpeedLimit_50x50.png"
             Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
         }
-        ColumnLayout {
+        ColumnLayout
+        {
             id: rightContainer
             spacing: 0
-            Text {
+            Text
+            {
                 id: valueText
                 text:"---"
                 font.pointSize: 22
                 font.bold: true
                 Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
             }
-            Text {
+            Text
+            {
                 id: unitsText
                 font.pointSize: 18
                 font.bold: true
@@ -129,6 +135,5 @@ Row {
                 visible: text.length > 0
             }
         }
-
     }
 }

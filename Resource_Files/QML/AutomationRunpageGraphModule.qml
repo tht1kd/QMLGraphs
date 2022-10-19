@@ -10,17 +10,13 @@ Rectangle {
     {
         anchors.fill: parent
         color: "whiteSmoke"       
-        ColumnLayout {
+        ColumnLayout
+        {
             id: layout
             anchors.fill: parent
-            anchors.margins: 0
             AreaGraphCompoundComponent
             {
                 id: grainLossGraph
-                Layout.fillWidth: true
-                Layout.preferredWidth: parent.width
-                Layout.maximumWidth: parent.width
-                Layout.maximumHeight: parent.height / 3
                 graphBackgroundDataColor: brushfactory.brushFromColor(color("#D7D4B8"))
                 graphForegroundDataColor: brushfactory.brushFromColor(color("#BFBD99"))
                 graphBackgroundDataName: "MOG Light"
@@ -44,9 +40,6 @@ Rectangle {
             {
                 id: foreignMaterialGraph
                 Layout.fillWidth: true
-                Layout.preferredWidth: parent.width
-                Layout.maximumWidth: parent.width
-                Layout.maximumHeight: parent.height / 3
                 graphForegroundDataColor: Brushfactory.brushFromColor(color("#BFBD99"))
                 graphForegroundDataName: "Foreign Material"
                 graphName: "Foreign Material"
@@ -62,10 +55,6 @@ Rectangle {
             AreaGraphCompoundComponent
             {
                 id: brokenGrainGraph
-                Layout.fillWidth: true
-                Layout.preferredWidth: parent.width
-                Layout.maximumWidth: parent.width
-                Layout.maximumHeight: parent.height / 3
                 graphForegroundDataColor: brushfactory.brushFromColor(color("#BFBD99"))
                 graphForegroundDataName: "Broken Grain"
                 graphName: "Broken Grain"

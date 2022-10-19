@@ -62,7 +62,8 @@ Rectangle {
         return newX <= 1 ? " min" : " mins"
     }
 
-    ChartView {
+    ChartView
+    {
         id: chartView
         anchors.fill: parent
         antialiasing: true
@@ -95,7 +96,8 @@ Rectangle {
             color: "gray"
             visible: false
         }
-        AreaSeries {
+        AreaSeries
+        {
             id: backgroundData
             name: backgroundDataName
             axisX: valueXAxis
@@ -103,10 +105,10 @@ Rectangle {
             brushFilename: ":/PFCApp/Resource_Files/Images/graph_fill_pattern.svg"
             borderColor: "#BFBD99"
 
-            upperSeries: LineSeries {
-            }
+            upperSeries: LineSeries {}
         }
-        AreaSeries {
+        AreaSeries
+        {
             id: foregroundData
             name: foregroundDataName
             axisX: valueXAxis
@@ -114,8 +116,7 @@ Rectangle {
 //            brushFilename: foregroundDataColor
 //            color: foregroundDataColor
             borderColor: "#D7D4B8"
-            upperSeries: LineSeries {
-             }
+            upperSeries: LineSeries {}
         }
         Row
         {
@@ -167,7 +168,6 @@ Rectangle {
                 }
             }
         }
-
         Column
         {
             id: valueYAxisLegendLayout

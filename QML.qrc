@@ -6,5 +6,6 @@
         <file>Resource_Files/QML/ReusableAreaGraph.qml</file>
         <file>Resource_Files/QML/ReusableLineGraph.qml</file>
         <file>Resource_Files/Images/SpeedLimit_50x50.png</file>
+        <file>Resource_Files/Images/graph_fill_pattern.svg</file>
     </qresource>
 </RCC>

@@ -83,17 +83,29 @@ Row {
             ReusableAreaGraph
             {
                 id: graph
-                width: root.width - rightContainer.width - maxAcceptableInput.width - leftContainer.width - row.spacing*2
-                height: parent.height
+                anchors.bottom: boundary.bottom
+                width: boundary.width
+                height: boundary.height
+                parent: boundary
             }
+        }
+        Rectangle {
+            id: boundary
+            anchors.left: numberBox.right
+            anchors.right: parent.right
+            anchors.top: parent.top
+            border.color: "black"
+            color: "transparent"
+            height: 97
+            width: root.width / 2
         }
         Rectangle {
             id: indicatorLine
             anchors.left: numberBox.right
-            anchors.right: parent.right
-            anchors.top: parent.top
-            anchors.topMargin: (numberBox.height / 2) + spacer.height + 4
-            color: "black"
+            anchors.right: boundary.right
+            anchors.top: boundary.top
+            anchors.topMargin: boundary.height - boundary.height/1.2
+            color: numberBox.border.color
             height: 2
             width: graph.width + row.spacing + 8
         }

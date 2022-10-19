@@ -1,4 +1,4 @@
-import QtGraphicalEffects 1.12
+import QtGraphicalEffects 1.0
 import QtQuick 2.12
 import QtCharts 2.3
 
@@ -6,8 +6,8 @@ Rectangle {
     //////////////////////////////////////////////////////
     // Properties
     //////////////////////////////////////////////////////
-    property alias backgroundDataColor: backgroundData.color
-    property alias foregroundDataColor: foregroundData.color
+    property alias backgroundDataColor: backgroundData.brush
+    property alias foregroundDataColor: foregroundData.brush
     property alias backgroundDataName: backgroundData.name
     property alias foregroundDataName: foregroundData.name
     property alias backgroundData: backgroundData.upperSeries
@@ -25,9 +25,9 @@ Rectangle {
 
     function deleteOldData(series)
     {
-        if(series.count >=30)
+        if(series.count >= 30)
         {
-            series.remove(0);
+           series.remove(0);
         }
         if(series.count === 0)
         {
@@ -50,7 +50,7 @@ Rectangle {
         var maxAxisValue = getAxisValue(newX, false);
         var midAxisValue = getAxisValue(newX, true);
         axisMaxLegend.text = maxAxisValue + getAxisUnit(maxAxisValue)
-        axisMidLegend.text = midAxisValue
+        axisMidLegend.text = midAxisValue + getAxisUnit(midAxisValue)
     }
     function getAxisValue(newXValue, isMidpoint)
     {
@@ -66,12 +66,13 @@ Rectangle {
         anchors.fill: parent
         antialiasing: true
         backgroundRoundness: 0
-        backgroundColor: "White"
-        margins.top: 0
-        margins.bottom: 0
-        margins.left: 0
-        margins.right: 0
+        backgroundColor: "transparent"
         legend.visible: false
+        anchors { fill: parent; margins: -12 }
+        margins { right: 0; bottom: 0; left: 0; top: 0 }
+        //animationOptions: ChartView.SeriesAnimations
+        //legend.alignment: Qt.AlignBottom
+
         ValueAxis
         {
             id: valueXAxis
@@ -82,6 +83,7 @@ Rectangle {
             tickCount: 3
             labelsVisible: false
             color: "gray"
+            visible:false
         }
         ValueAxis
         {
@@ -90,23 +92,29 @@ Rectangle {
             min: 0
             max: 1.2
             tickCount: 2
+            labelsVisible: false
             color: "gray"
+            visible: false
         }
         AreaSeries {
             id: backgroundData
             name: backgroundDataName
             axisX: valueXAxis
             axisYRight: valueYAxis
-            borderColor: color
+            brushFilename: ":/PFCApp/Resource_Files/Images/graph_fill_pattern.svg"
+            borderColor: "#BFBD99"
+
             upperSeries: LineSeries {
             }
+            onBrushChanged: console.log(color.r, color.g, color.b, color.a)
         }
         AreaSeries {
             id: foregroundData
             name: foregroundDataName
             axisX: valueXAxis
             axisYRight: valueYAxis
-            borderColor: color
+            brushFilename: foregroundDataColor
+            borderColor: "#D7D4B8"
             upperSeries: LineSeries {
              }
         }
@@ -116,13 +124,15 @@ Rectangle {
             x: chartView.plotArea.x
             y: chartView.plotArea.y + chartView.plotArea.height + 5
             width: chartView.plotArea.width
+            anchors.horizontalCenter: chartView.plotArea.Center
             height: 20
             Rectangle
             {
                 height: parent.height
                 x: valueXAxisLegendLayout.x
                 anchors.left: parent.left
-                width: 150
+                width: 50
+                color: "transparent"
                 Text
                 {
                     id: axisMaxLegend
@@ -133,9 +143,10 @@ Rectangle {
             Rectangle
             {
                 height: parent.height
-                width: 150
+                width: 50
                 x: valueXAxisLegendLayout.x + parseInt(valueXAxisLegendLayout.width/2)
                 anchors.horizontalCenter: parent.horizontalCenter
+                color: "transparent"
                 Text
                 {
                     id: axisMidLegend
@@ -147,10 +158,11 @@ Rectangle {
             {
                 anchors.right: parent.right
                 height: parent.height
-                width: 150
+                width: 50
+                color: "transparent"
                 Text
                 {
-                    text: "0"
+                    text: "0 min"
                     anchors.fill: parent
                     horizontalAlignment: Text.AlignRight
                 }

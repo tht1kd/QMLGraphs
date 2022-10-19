@@ -22,8 +22,8 @@ Rectangle {
                 Layout.preferredWidth: parent.width
                 Layout.maximumWidth: parent.width
                 Layout.minimumHeight: parent.height / 3 - 5
-                graphBackgroundDataColor: "#a900ff"
-                graphForegroundDataColor: "#8c00d3"
+                graphBackgroundDataColor: brushfactory.brushFromColor("#D7D4B8")
+                graphForegroundDataColor: brushfactory.brushFromColor("#BFBD99")
                 graphBackgroundDataName: "MOG Light"
                 graphForegroundDataName: "MOG Heavy"
                 Connections
@@ -46,7 +46,7 @@ Rectangle {
                 Layout.preferredWidth: parent.width
                 Layout.maximumWidth: parent.width
                 Layout.minimumHeight: parent.height / 3 - 5
-                graphForegroundDataColor: "lightblue"
+                graphForegroundDataColor: brushfactory.brushFromColor("#BFBD99")
                 graphForegroundDataName: "Foreign Material"
                 Connections
                 {
@@ -64,7 +64,7 @@ Rectangle {
                 Layout.preferredWidth: parent.width
                 Layout.maximumWidth: parent.width
                 Layout.minimumHeight: parent.height / 3 - 5
-                graphForegroundDataColor: "tomato"
+                graphForegroundDataColor: brushfactory.brushFromColor("#BFBD99")
                 graphForegroundDataName: "Broken Grain"
                 Connections
                 {

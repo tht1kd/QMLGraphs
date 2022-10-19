@@ -1,8 +1,9 @@
-import QtGraphicalEffects 1.0
-import QtQuick 2.12
 import QtCharts 2.3
+import QtGraphicalEffects 1.15
+import QtQuick 2.12
 
-Rectangle {
+Rectangle
+{
     //////////////////////////////////////////////////////
     // Properties
     //////////////////////////////////////////////////////
@@ -101,7 +102,6 @@ Rectangle {
         AreaSeries
         {
             id: backgroundData
-            name: backgroundDataName
             axisX: valueXAxis
             axisYRight: valueYAxis
             borderColor: "#BFBD99"
@@ -110,7 +110,6 @@ Rectangle {
         AreaSeries
         {
             id: foregroundData
-            name: foregroundDataName
             axisX: valueXAxis
             axisYRight: valueYAxis
             borderColor: "#D7D4B8"

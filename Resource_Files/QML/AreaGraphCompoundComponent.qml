@@ -1,7 +1,9 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.3
-Row {
+
+Row
+{
     id: root
     //////////////////////////////////////////////////////
     // Properties
@@ -49,6 +51,7 @@ Row {
         {
             id: numberBox
             text: "1.0%"
+            font.bold: true
             padding: 0
             background: Rectangle
             {

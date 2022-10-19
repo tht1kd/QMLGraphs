@@ -1,8 +1,9 @@
-import QtQuick 2.12
 import QtCharts 2.3
 import QtGraphicalEffects 1.15
+import QtQuick 2.12
 
-Rectangle {
+Rectangle
+{
     //////////////////////////////////////////////////////
     // Properties
     //////////////////////////////////////////////////////
@@ -22,11 +23,12 @@ Rectangle {
     //////////////////////////////////////////////////////
     id: root
     color: chartView.backgroundColor
+
     function deleteOldData(series)
     {
-        if(series.count >=30)
+        if(series.count >= 30)
         {
-            series.remove(0);
+           series.remove(0);
         }
         if(series.count === 0)
         {
@@ -36,20 +38,21 @@ Rectangle {
             }
         }
     }
-    function setNewData(series, newX, newY, newMaxValue)
+    function setNewData(series, newX, newY, maxData)
     {
         series.append(newX+30, newY)
         valueXAxis.min = series.at(0).x
         valueXAxis.max = series.at(series.count-1).x
-        valueYAxis.max = newMaxValue
+        valueYAxis.max = maxData
+        axisYMaxLegend.text = (maxData).toFixed(1) ;
         updateXAxis(30)
     }
     function updateXAxis(newX)
     {
         var maxAxisValue = getAxisValue(newX, false);
         var midAxisValue = getAxisValue(newX, true);
-        axisMaxLegend.text = maxAxisValue + getAxisUnit(maxAxisValue)
-        axisMidLegend.text = midAxisValue + getAxisUnit(midAxisValue)
+        axisMidLegend.text = midAxisValue
+        axisMaxLegend.text = maxAxisValue + getAxisUnit(midAxisValue)
     }
     function getAxisValue(newXValue, isMidpoint)
     {
@@ -65,14 +68,12 @@ Rectangle {
         id: chartView
         anchors.fill: parent
         antialiasing: true
-        animationOptions: ChartView.NoAnimation
         backgroundRoundness: 0
-        backgroundColor: "White"
-        margins.top: 0
-        margins.bottom: 0
-        margins.left: 0
-        margins.right: 0
-        legend.alignment: Qt.AlignBottom
+        backgroundColor: "transparent"
+        legend.visible: false
+        anchors { fill: parent; centerIn: parent; margins: -15}
+        margins { right: 0; bottom: 0; left: 0; top: 0 }
+//        animationOptions: ChartView.SeriesAnimations
         ValueAxis
         {
             id: valueXAxis
@@ -83,6 +84,7 @@ Rectangle {
             tickCount: 3
             labelsVisible: false
             color: "gray"
+            visible:false
         }
         ValueAxis
         {
@@ -91,7 +93,9 @@ Rectangle {
             min: 0
             max: 1.2
             tickCount: 2
+            labelsVisible: false
             color: "gray"
+            visible: false
         }
         SplineSeries
         {
@@ -112,12 +116,14 @@ Rectangle {
             y: chartView.plotArea.y + chartView.plotArea.height + 5
             width: chartView.plotArea.width
             anchors.horizontalCenter: chartView.plotArea.Center
-            height: 30
+            height: 20
             Rectangle
             {
                 height: parent.height
                 x: valueXAxisLegendLayout.x
-                width: 150
+                anchors.left: parent.left
+                width: 50
+                color: "transparent"
                 Text
                 {
                     id: axisMaxLegend
@@ -128,9 +134,10 @@ Rectangle {
             Rectangle
             {
                 height: parent.height
-                width: 150
+                width: 50
                 x: valueXAxisLegendLayout.x + parseInt(valueXAxisLegendLayout.width/2)
                 anchors.horizontalCenter: parent.horizontalCenter
+                color: "transparent"
                 Text
                 {
                     id: axisMidLegend
@@ -142,19 +149,52 @@ Rectangle {
             {
                 anchors.right: parent.right
                 height: parent.height
-                width: 150
+                width: 50
+                color: "transparent"
                 Text
                 {
-                    text: "0 min"
+                    text: "0"
                     anchors.fill: parent
                     horizontalAlignment: Text.AlignRight
                 }
             }
         }
+        Column
+        {
+            id: valueYAxisLegendLayout
+            x: chartView.plotArea.x + chartView.plotArea.width + 4
+            y: chartView.plotArea.y - 8
+            width: 50
+            anchors.horizontalCenter: chartView.plotArea.Center
+            height: chartView.plotArea.height + 8
+            Rectangle
+            {
+                height: 20
+                anchors.top: parent.top
+                width: parent.width
+                color: "transparent"
+                Text
+                {
+                    id: axisYMaxLegend
+                    anchors.fill: parent
+                    verticalAlignment: Text.AlignTop
+                }
+            }
+            Rectangle
+            {
+                anchors.bottom: parent.bottom
+                height: 20
+                width: parent.width
+                color: "transparent"
+                Text
+                {
+                    text: "0"
+                    anchors.fill: parent
+                }
+            }
+        }
     }
 }
-
-
 /*##^##
 Designer {
     D{i:0;autoSize:true;formeditorZoom:1.25;height:480;width:780}D{i:2}D{i:3}D{i:4}D{i:1}

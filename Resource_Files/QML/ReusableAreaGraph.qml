@@ -6,8 +6,8 @@ Rectangle {
     //////////////////////////////////////////////////////
     // Properties
     //////////////////////////////////////////////////////
-    property alias backgroundDataColor: backgroundData.brush
-    property alias foregroundDataColor: foregroundData.brush
+    property alias backgroundDataColor: backgroundData.color
+    property alias foregroundDataColor: backgroundData.color
     property alias backgroundDataName: backgroundData.name
     property alias foregroundDataName: foregroundData.name
     property alias backgroundData: backgroundData.upperSeries
@@ -22,7 +22,6 @@ Rectangle {
     //////////////////////////////////////////////////////
     id: root
     color: chartView.backgroundColor
-    baselineOffset: 0
 
     function deleteOldData(series)
     {
@@ -106,14 +105,14 @@ Rectangle {
 
             upperSeries: LineSeries {
             }
-            onBrushChanged: console.log(color.r, color.g, color.b, color.a)
         }
         AreaSeries {
             id: foregroundData
             name: foregroundDataName
             axisX: valueXAxis
             axisYRight: valueYAxis
-            brushFilename: foregroundDataColor
+//            brushFilename: foregroundDataColor
+//            color: foregroundDataColor
             borderColor: "#D7D4B8"
             upperSeries: LineSeries {
              }

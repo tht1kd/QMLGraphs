@@ -13,7 +13,6 @@ Rectangle {
         ColumnLayout {
             id: layout
             anchors.fill: parent
-            spacing: 1
             anchors.margins: 0
             AreaGraphCompoundComponent
             {
@@ -21,11 +20,13 @@ Rectangle {
                 Layout.fillWidth: true
                 Layout.preferredWidth: parent.width
                 Layout.maximumWidth: parent.width
-                Layout.minimumHeight: parent.height / 3 - 5
-                graphBackgroundDataColor: brushfactory.brushFromColor("#D7D4B8")
-                graphForegroundDataColor: brushfactory.brushFromColor("#BFBD99")
+                Layout.maximumHeight: parent.height / 3
+                graphBackgroundDataColor: brushfactory.brushFromColor(color("#D7D4B8"))
+                graphForegroundDataColor: brushfactory.brushFromColor(color("#BFBD99"))
                 graphBackgroundDataName: "MOG Light"
                 graphForegroundDataName: "MOG Heavy"
+                graphName: "Grain Loss"
+                unitsValue: "%"
                 Connections
                 {
                     target: pfcData
@@ -45,9 +46,10 @@ Rectangle {
                 Layout.fillWidth: true
                 Layout.preferredWidth: parent.width
                 Layout.maximumWidth: parent.width
-                Layout.minimumHeight: parent.height / 3 - 5
-                graphForegroundDataColor: brushfactory.brushFromColor("#BFBD99")
+                Layout.maximumHeight: parent.height / 3
+                graphForegroundDataColor: Brushfactory.brushFromColor(color("#BFBD99"))
                 graphForegroundDataName: "Foreign Material"
+                graphName: "Foreign Material"
                 Connections
                 {
                     target: pfcData
@@ -63,9 +65,10 @@ Rectangle {
                 Layout.fillWidth: true
                 Layout.preferredWidth: parent.width
                 Layout.maximumWidth: parent.width
-                Layout.minimumHeight: parent.height / 3 - 5
-                graphForegroundDataColor: brushfactory.brushFromColor("#BFBD99")
+                Layout.maximumHeight: parent.height / 3
+                graphForegroundDataColor: brushfactory.brushFromColor(color("#BFBD99"))
                 graphForegroundDataName: "Broken Grain"
+                graphName: "Broken Grain"
                 Connections
                 {
                     target: pfcData

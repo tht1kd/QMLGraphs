@@ -10,8 +10,8 @@ Row {
     property alias graphForegroundDataColor: graph.foregroundDataColor
     property alias graphBackgroundDataName: graph.backgroundDataName
     property alias graphForegroundDataName: graph.foregroundDataName
-    property alias dataLabelValue: word.text
-    property alias unitsValue: units.text;
+    property alias dataLabelValue: valueText.text
+    property alias unitsValue: unitsText.text;
     property alias graphName: graphDataName.text
     //////////////////////////////////////////////////////
     /// Sizing
@@ -27,12 +27,13 @@ Row {
     {
         graph.deleteOldData(graph.backgroundData)
         graph.setNewData(graph.backgroundData, newX, newY, newMaxValue)
+        valueText.text = parseFloat(newY).toFixed(1)
     }
     function onForegroundDataChanged(newX, newY, newMaxValue)
     {
         graph.deleteOldData(graph.foregroundData)
         graph.setNewData(graph.foregroundData, newX, newY, newMaxValue)
-        word.text = parseFloat(newY).toFixed(1)
+        valueText.text = parseFloat(newY).toFixed(1)
     }
     Column
     {
@@ -114,20 +115,20 @@ Row {
             id: rightContainer
             spacing: 0
             Text {
-                id: word
+                id: valueText
                 text:"---"
                 font.pointSize: 22
                 font.bold: true
                 Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
             }
             Text {
-                id: units
+                id: unitsText
                 font.pointSize: 18
                 font.bold: true
                 Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
-                visible: (unitsValue !== "undefined")
-                text: unitsValue
+                visible: text.length > 0
             }
         }
+
     }
 }

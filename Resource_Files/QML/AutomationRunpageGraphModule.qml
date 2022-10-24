@@ -63,11 +63,15 @@ Rectangle
             Layout.leftMargin: 8
             Layout.rightMargin: 8
             graphBackgroundDataBrush: ":/PFCApp/Resource_Files/Images/graph_fill_pattern.svg"
+            backgroundDataIconLegendSource: "qrc:///PFCApp/Resource_Files/Images/SpeedLimit_50x50.png"
+            backgroundDataFillPatternLegendSource: "qrc:///PFCApp/Resource_Files/Images/graph_fill_pattern.svg"
+            foregroundDataIconLegendSource: "qrc:///PFCApp/Resource_Files/Images/SpeedLimit_50x50.png"
             graphForegroundDataColor: "#D7D4B8"
             graphBackgroundDataName: "MOG Light"
             graphForegroundDataName: "MOG Heavy"
             graphName: "Grain Loss"
             unitsValue: "%"
+            iconLegendVisible: true
             Connections
             {
                 target: pfcData
@@ -91,6 +95,7 @@ Rectangle
             graphForegroundDataColor: "#D7D4B8"
             graphForegroundDataName: "Foreign Material"
             graphName: "Foreign Material"
+            iconLegendVisible: false
             Connections
             {
                 target: pfcData
@@ -110,6 +115,7 @@ Rectangle
             graphForegroundDataColor: "#D7D4B8"
             graphForegroundDataName: "Broken Grain"
             graphName: "Broken Grain"
+            iconLegendVisible: false
             Connections
             {
                 target: pfcData

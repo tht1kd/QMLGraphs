@@ -16,6 +16,10 @@ Item {
     property alias dataLabelValue: valueText.text
     property alias unitsValue: unitsText.text;
     property alias graphName: graphDataName.text
+    property alias iconLegendVisible: legendImagesContainer.visible
+    property alias backgroundDataIconLegendSource: backgroundDataIconLegend.source
+    property alias backgroundDataFillPatternLegendSource: backgroundDataFillPatternLegend.source
+    property alias foregroundDataIconLegendSource: foregroundDataIconLegend.source
     //////////////////////////////////////////////////////
     /// Sizing
     //////////////////////////////////////////////////////
@@ -24,7 +28,6 @@ Item {
     //////////////////////////////////////////////////////
     /// Creation
     //////////////////////////////////////////////////////
-//    spacing: 8
 
     function onBackgroundDataChanged(newX, newY, newMaxValue)
     {
@@ -55,27 +58,28 @@ Item {
             {
                 id: legendImagesContainer
                 height: parent.height
-                width: parent.height * 4
 
                 Image {
                     id: backgroundDataIconLegend
-                    source: "qrc:///PFCApp/Resource_Files/Images/SpeedLimit_50x50.png"
                     height: parent.height
+                    sourceSize: Qt.size(25, parent.height)
                 }
-                Image {
+                Image  {
                     id: backgroundDataFillPatternLegend
-                    source: "qrc:///PFCApp/Resource_Files/Images/SpeedLimit_50x50.png"
                     height: parent.height
+                    width: 25
+                    sourceSize: Qt.size(25, parent.height)
                 }
                 Image {
                     id: foregroundDataIconLegend
-                    source: "qrc:///PFCApp/Resource_Files/Images/SpeedLimit_50x50.png"
                     height: parent.height
+                    sourceSize: Qt.size(25, parent.height)
                 }
-                Image {
+                Rectangle {
                     id: foregroundDataFillPatternLegend
-                    source: "qrc:///PFCApp/Resource_Files/Images/graph_fill_pattern.svg"
                     height: parent.height
+                    width: 25
+                    color: graphForegroundDataColor
                 }
             }
         }

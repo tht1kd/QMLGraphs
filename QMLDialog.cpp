@@ -11,9 +11,11 @@ namespace
 
 //TODO: correctly instantiate with different data // DONE!
 //TODO: be able to update "numbers" data from CompoundComponent. //DONE!
-//TODO: be able to open overlay in QML for changing max. https://doc.qt.io/qt-6/qtqml-cppintegration-interactqmlfromcpp.html
-//TODO: create productivity section
+//TODO: be able to open overlay in QML for changing max. https://doc.qt.io/qt-6/qtqml-cppintegration-interactqmlfromcpp.html //LATER!
+//TODO: create productivity section //DONE!
 //TODO: Cleaup QML
+//TODO: Ajay's request for this story, make runpage, no button clicking. Connect to all old data.
+
 
 QMLDialog::QMLDialog(QWidget *parent)
     : QDialog(parent)

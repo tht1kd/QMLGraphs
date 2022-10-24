@@ -157,7 +157,6 @@ Row
     }
     ColumnLayout
     {
-        anchors.left: wholeGraph.anchors.right + 32
         spacing: 8
         id: rightContainer
         height: root.height

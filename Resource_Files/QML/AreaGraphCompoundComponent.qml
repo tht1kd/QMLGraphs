@@ -55,7 +55,7 @@ Item {
             {
                 id: legendImagesContainer
                 height: parent.height
-    //            width: parent.height * 4
+                width: parent.height * 4
 
                 Image {
                     id: backgroundDataIconLegend
@@ -71,46 +71,38 @@ Item {
                     id: foregroundDataIconLegend
                     source: "qrc:///PFCApp/Resource_Files/Images/SpeedLimit_50x50.png"
                     height: parent.height
-                    width: 25
                 }
                 Image {
                     id: foregroundDataFillPatternLegend
                     source: "qrc:///PFCApp/Resource_Files/Images/graph_fill_pattern.svg"
                     height: parent.height
-                    width: 25
                 }
             }
         }
-
         Row
         {
-            Column
+            Button
             {
-                id: graphNameAndMaxLimitButtonLayout
-                width: 120
-                Button
+                id: numberBox
+                text: "1.0%"
+                font.bold: true
+                padding: 0
+                background: Rectangle
                 {
-                    id: numberBox
-                    text: "1.0%"
-                    font.bold: true
-                    padding: 0
-                    background: Rectangle
-                    {
-                        color: "white"
-                        border.color: "black"
-                        border.width: 2
-                    }
-                    height: graph.height /2
-                    width: 80
+                    color: "white"
+                    border.color: "black"
+                    border.width: 2
                 }
+                height: graph.height /2
+                width: 80
             }
             Item
             {
                 id: wholeGraph
                 height: root.height
-                width: root.width - graphNameAndMaxLimitButtonLayout.implicitWidth - rightLayout.implicitWidth - 16 - 70
+                width: root.width - numberBox.implicitWidth - rightLayout.implicitWidth - 16 - 70
         //        anchors.left: graphNameAndMaxLimitButtonLayout.anchors.right
-                anchors.leftMargin: 70
+//                anchors.leftMargin: 70
                 Row
                 {
                     id: graphRow

@@ -75,7 +75,6 @@ Rectangle
         legend.visible: false
         anchors { fill: parent; centerIn: parent; margins: -15}
         margins { right: 0; bottom: 0; left: 0; top: 0 }
-//        animationOptions: ChartView.SeriesAnimations
         ValueAxis
         {
             id: valueXAxis

@@ -53,7 +53,7 @@ Item
             Text
             {
                 id: graphDataName
-                width: parent.width - legendImagesContainer.width
+                width: parent.width - legendImagesContainer.width + 8
             }
             Row
             {
@@ -90,6 +90,7 @@ Item
         }
         Row
         {
+            spacing: 8
             Button
             {
                 id: numberBox
@@ -105,57 +106,16 @@ Item
                 height: graph.height /2
                 width: 80
             }
-            Item
+            ReusableAreaGraph
             {
-                id: wholeGraph
-                height: root.height
-                width: root.width - numberBox.implicitWidth - rightLayout.implicitWidth
-                Row
-                {
-                    id: graphRow
-                    anchors.fill: parent
-                    spacing: 16
-                    Rectangle
-                    {
-                        id: graphBoundaryBox
-                        border.color: "black"
-                        color: "transparent"
-                        height: parent.height
-                        width: root.width / 2
-                        ReusableAreaGraph
-                        {
-                            id: graph
-                            width: parent.width
-                            height: parent.height
-                            anchors.right: parent.right
-                            anchors.top: parent.top
-                            anchors.bottom: parent.bottom
-                            anchors.left: parent.left
-                        }
-                    }
-                    Image
-                    {
-                        id: limitIcon
-                        source: "qrc:///PFCApp/Resource_Files/Images/SpeedLimit_50x50.png"
-                        anchors.verticalCenter: indicatorLine.verticalCenter
-                        x: indicatorLine.x - 50
-                    }
-                    Rectangle
-                    {
-                        id: indicatorLine
-                        anchors.left: numberBox.right
-                        anchors.right: graphBoundaryBox.right
-                        anchors.top: graphBoundaryBox.top
-                        anchors.topMargin: graphBoundaryBox.height - graphBoundaryBox.height/1.2
-                        color: "black"
-                        height: 4
-                        width: graph.width + graphRow.spacing + 8
-                    }
-                }
+                id: graph
+                width: root.width - numberBox.implicitWidth - rightLayout.implicitWidth - 16
+                height: parent.height
             }
             RowLayout
             {
                id: rightLayout
+               height: root.height
                spacing: 8
                 Image
                 {

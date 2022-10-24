@@ -22,7 +22,8 @@ Rectangle
     /// Creation
     //////////////////////////////////////////////////////
     id: root
-    color: chartView.backgroundColor
+    border.color: "black"
+    color: "transparent"
 
     function deleteOldData(series)
     {
@@ -44,7 +45,7 @@ Rectangle
         valueXAxis.min = series.at(0).x
         valueXAxis.max = series.at(series.count-1).x
         valueYAxis.max = maxData
-        axisYMaxLegend.text = (maxData).toFixed(1) ;
+        axisYMaxLegend.text = (maxData).toFixed(1);
         updateXAxis(30)
     }
     function updateXAxis(newX)

@@ -16,12 +16,12 @@ Row
     //////////////////////////////////////////////////////
     //implicitHeight:
     //implicitWidth:
-    //////////////////////////////////////////////////////
-    /// Creation
-    //////////////////////////////////////////////////////
     spacing: 8
     anchors.leftMargin: 8
     anchors.rightMargin: 8
+    //////////////////////////////////////////////////////
+    /// Creation
+    //////////////////////////////////////////////////////
 
     function onSeriesOneChanged(newX, newY, newMaxValue)
     {
@@ -120,47 +120,18 @@ Row
             }
         }
     }
-    Item
+    ReusableLineGraph
     {
-        id: wholeGraph
-        height: root.height
-        width: root.width - leftButtonsLayout.width - rightContainer.width - 100
-//        anchors.left: graphSeries1Name.anchors.right
-        anchors.leftMargin: 70
-        Row
-        {
-            id: row
-            anchors.fill: parent
-            spacing: 16
-            Rectangle
-            {
-                id: graphBoundaryBox
-                Layout.fillWidth: true
-                border.color: "black"
-                color: "transparent"
-                height: parent.height
-                width: root.width /2
-                ReusableLineGraph
-                {
-                    id: graph
-                    width: parent.width
-                    height: parent.height
-                    anchors.right: parent.right
-                    anchors.top: parent.top
-                    anchors.left: parent.left
-                    anchors.bottom: parent.bottom
-                    anchors.fill: parent
-                    series1Color: "black"
-                }
-            }
-        }
+        id: graph
+        width: root.width - leftButtonsLayout.implicitWidth - rightLayout.width - 16
+        height: parent.height
     }
     ColumnLayout
     {
         spacing: 8
-        id: rightContainer
+        id: rightLayout
         height: root.height
-        width: 150
+        width: 100
         Button
         {
             id: productivityButton
@@ -171,7 +142,7 @@ Row
                 border.width: 2
             }
             width: parent.width
-            height: wholeGraph.height / 2
+            height: graph.height / 2
             Layout.preferredHeight: productivityButtonLayout.implicitHeight
             Layout.fillHeight: false
             Layout.fillWidth: true

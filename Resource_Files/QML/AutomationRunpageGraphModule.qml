@@ -9,7 +9,6 @@ Rectangle
     {
         id: layout
         anchors.fill: parent
-        Layout.leftMargin: 8
         Rectangle
         {
             id: productivityDivider
@@ -21,20 +20,24 @@ Rectangle
                 id: productivityDividerText
                 anchors.centerIn: parent
                 text: "Productivity"
+                font.bold: true
             }
         }
         LineGraphCompoundComponent
         {
             id: productivityGraph
-            graphDataColor: "black"
+            graphSeries1Color: "black"
             Layout.fillWidth: true
+            Layout.leftMargin: 8
+            Layout.rightMargin: 8
             Layout.minimumHeight: 100
+            Layout.maximumHeight: 200
             Connections
             {
                 target: pfcData
                 onProductivityValueChanged:
                 {
-                   productivityGraph.onDataOneChanged(pfcData.productivityValue.x, pfcData.productivityValue.y, pfcData.productivityMaxValue)
+                   productivityGraph.onSeriesOneChanged(pfcData.productivityValue.x, pfcData.productivityValue.y, pfcData.productivityMaxValue)
                 }
             }
         }
@@ -49,6 +52,7 @@ Rectangle
                 id: qualityDividerText
                 anchors.centerIn: parent
                 text: "Job Quality"
+                font.bold: true
             }
         }
         AreaGraphCompoundComponent
@@ -56,6 +60,8 @@ Rectangle
             id: grainLossGraph
             Layout.fillWidth: true
             Layout.minimumHeight: 100
+            Layout.leftMargin: 8
+            Layout.rightMargin: 8
             graphBackgroundDataBrush: ":/PFCApp/Resource_Files/Images/graph_fill_pattern.svg"
             graphForegroundDataColor: "#D7D4B8"
             graphBackgroundDataName: "MOG Light"
@@ -80,6 +86,8 @@ Rectangle
             id: foreignMaterialGraph
             Layout.fillWidth: true
             Layout.minimumHeight: 100
+            Layout.leftMargin: 8
+            Layout.rightMargin: 8
             graphForegroundDataColor: "#D7D4B8"
             graphForegroundDataName: "Foreign Material"
             graphName: "Foreign Material"
@@ -97,6 +105,8 @@ Rectangle
             id: brokenGrainGraph
             Layout.fillWidth: true
             Layout.minimumHeight: 100
+            Layout.leftMargin: 8
+            Layout.rightMargin: 8
             graphForegroundDataColor: "#D7D4B8"
             graphForegroundDataName: "Broken Grain"
             graphName: "Broken Grain"

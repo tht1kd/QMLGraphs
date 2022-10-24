@@ -7,12 +7,12 @@ Rectangle
     //////////////////////////////////////////////////////
     // Properties
     //////////////////////////////////////////////////////
-    property alias dataColor: graphData.color
-    property alias dataName: graphData.name
-    property alias data2Color: graphData2.color
-    property alias data2Name: graphData2.name
-    property alias series1: graphData
-    property alias series2: graphData2
+    property alias series1Color: series1.color
+    property alias series1Name: series1.name
+    property alias series2Color: series2.color
+    property alias series2Name: series2.name
+    property alias series1: series1
+    property alias series2: series2
     //////////////////////////////////////////////////////
     /// Sizing
     //////////////////////////////////////////////////////
@@ -73,7 +73,6 @@ Rectangle
         legend.visible: false
         anchors { fill: parent; centerIn: parent; margins: -15}
         margins { right: 0; bottom: 0; left: 0; top: 0 }
-//        animationOptions: ChartView.SeriesAnimations
         ValueAxis
         {
             id: valueXAxis
@@ -99,13 +98,13 @@ Rectangle
         }
         SplineSeries
         {
-            id: graphData
+            id: series1
             axisX: valueXAxis
             axisYRight: valueYAxis
         }
         SplineSeries
         {
-            id: graphData2
+            id: series2
             axisX: valueXAxis
             axisYRight: valueYAxis
         }

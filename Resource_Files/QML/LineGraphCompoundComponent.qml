@@ -7,10 +7,10 @@ Row
     //////////////////////////////////////////////////////
     // Properties
     //////////////////////////////////////////////////////
-    property alias graphDataColor: graph.dataColor
-    property alias graphDataName: graph.dataName
-    property alias graphData2Color: graph.data2Color
-    property alias graphData2Name: graph.data2Name
+    property alias graphSeries1Color: graph.series1Color
+    property alias graphSeries1Name: graph.series1Name
+    property alias graphSeries2Color: graph.series2Color
+    property alias graphSeries2Name: graph.series2Name
     //////////////////////////////////////////////////////
     /// Sizing
     //////////////////////////////////////////////////////
@@ -20,18 +20,22 @@ Row
     /// Creation
     //////////////////////////////////////////////////////
     spacing: 8
-    function onDataOneChanged(newX, newY, newMaxValue)
+    anchors.leftMargin: 8
+    anchors.rightMargin: 8
+
+    function onSeriesOneChanged(newX, newY, newMaxValue)
     {
         graph.deleteOldData(graph.series1)
         graph.setNewData(graph.series1, newX, newY, newMaxValue)
         valueText.text = parseFloat(newY).toFixed(1)
     }
-    function onDataTwoChanged(newX, newY, newMaxValue)
+    function onSeriesTwoChanged(newX, newY, newMaxValue)
     {
         graph.deleteOldData(graph.series2)
         graph.setNewData(graph.series2, newX, newY, newMaxValue)
     }
-    ColumnLayout
+
+    Column
     {
         id: leftButtonsLayout
         width: 120
@@ -40,9 +44,8 @@ Row
         Button
         {
             id: speedLimit
-            Layout.alignment: Qt.AlignLeft | Qt.AlignBaseline
-            Layout.fillWidth: true
-            height: graph.height /2 - 8
+            height: speedLimitLayout.implicitHeight
+            width: parent.width
             background: Rectangle
             {
                 color: "white"
@@ -52,6 +55,7 @@ Row
             RowLayout
             {
                 id: speedLimitLayout
+                width:parent.width
                 Image
                 {
                     source: "qrc:///PFCApp/Resource_Files/Images/SpeedLimit_50x50.png"
@@ -61,14 +65,14 @@ Row
                     Text
                     {
                         id: speedLimitValue
-                        font.pointSize: 16
+                        font.pointSize: 12
                         font.bold: true
                         text: "6.5"
                    }
                     Text
                     {
                         id: speedLimitUnits
-                        font.pointSize: 14
+                        font.pointSize: 10
                         font.bold: true
                         text: "mi/h"
                    }
@@ -80,7 +84,8 @@ Row
             id: powerLimit
             Layout.alignment: Qt.AlignLeft | Qt.AlignBaseline
             Layout.fillWidth: true
-            height: graph.height /2 - 8
+            height: powerLimitLayout.implicitHeight
+            width: parent.width
             background: Rectangle
             {
                 color: "white"
@@ -90,6 +95,7 @@ Row
             RowLayout
             {
                 id: powerLimitLayout
+                width:parent.width
                 Image
                 {
                     source: "qrc:///PFCApp/Resource_Files/Images/SpeedLimit_50x50.png"
@@ -99,14 +105,14 @@ Row
                     Text
                     {
                         id: powerLimitValue
-                        font.pointSize: 16
+                        font.pointSize: 12
                         font.bold: true
                         text: "105"
                    }
                     Text
                     {
                         id: powerLimitUnits
-                        font.pointSize: 14
+                        font.pointSize: 10
                         font.bold: true
                         text: "%"
                    }
@@ -119,8 +125,9 @@ Row
         id: wholeGraph
         height: root.height
         width: root.width - leftButtonsLayout.width - rightContainer.width - 100
-        anchors.left: graphDataName.anchors.right
-        RowLayout
+//        anchors.left: graphSeries1Name.anchors.right
+        anchors.leftMargin: 70
+        Row
         {
             id: row
             anchors.fill: parent
@@ -128,28 +135,33 @@ Row
             Rectangle
             {
                 id: graphBoundaryBox
-                anchors.right: parent.right
-                anchors.top: parent.top
-                anchors.left: parent.left
-                anchors.bottom: parent.bottom
                 Layout.fillWidth: true
                 border.color: "black"
                 color: "transparent"
                 height: parent.height
-                width: parent.width
+                width: root.width /2
                 ReusableLineGraph
                 {
                     id: graph
+                    width: parent.width
+                    height: parent.height
+                    anchors.right: parent.right
+                    anchors.top: parent.top
+                    anchors.left: parent.left
+                    anchors.bottom: parent.bottom
                     anchors.fill: parent
+                    series1Color: "black"
                 }
             }
         }
     }
     ColumnLayout
     {
+        anchors.left: wholeGraph.anchors.right + 32
+        spacing: 8
         id: rightContainer
         height: root.height
-        width: 75
+        width: 150
         Button
         {
             id: productivityButton
@@ -159,7 +171,8 @@ Row
                 border.color: "black"
                 border.width: 2
             }
-            height: graph.height / 2
+            width: parent.width
+            height: wholeGraph.height / 2
             Layout.preferredHeight: productivityButtonLayout.implicitHeight
             Layout.fillHeight: false
             Layout.fillWidth: true
@@ -168,20 +181,22 @@ Row
             {
                 id: productivityButtonLayout
                 spacing: 0
+                width: parent.width
+                Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
                 Text
                 {
                     id: valueText
                     text:"---"
                     font.pointSize: 22
                     font.bold: true
-                    Layout.fillWidth: true
+                    Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
                 }
                 Text
                 {
                     id: unitsText
                     font.pointSize: 18
                     font.bold: true
-                    Layout.fillWidth: true
+                    Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
                     visible: text.length > 0
                     text: "ac/h"
                 }

@@ -39,6 +39,7 @@ Row
         graph.setNewData(graph.foregroundData, newX, newY, newMaxValue)
         valueText.text = parseFloat(newY).toFixed(1)
     }
+
     Column
     {
         id: graphNameAndMaxLimitButtonLayout
@@ -56,7 +57,7 @@ Row
             background: Rectangle
             {
                 color: "white"
-                border.color: graphForegroundDataColor
+                border.color: "black"
                 border.width: 2
             }
             height: graph.height /2
@@ -66,28 +67,31 @@ Row
     Item
     {
         id: wholeGraph
-        height: parent.height
-        width: graphNameAndMaxLimitButtonLayout.implicitWidth + row.spacing + graph.width
-        anchors.left: graphDataName.anchors.right
+        height: root.height
+        width: root.width - graphNameAndMaxLimitButtonLayout.implicitWidth - rightLayout.implicitWidth - 16 - 70
+//        anchors.left: graphNameAndMaxLimitButtonLayout.anchors.right
+        anchors.leftMargin: 70
         Row
         {
-            id: row
+            id: graphRow
             anchors.fill: parent
             spacing: 16
             Rectangle
             {
                 id: graphBoundaryBox
-                anchors.right: parent.right
-                anchors.top: parent.top
                 border.color: "black"
                 color: "transparent"
-                height: root.height
+                height: parent.height
                 width: root.width / 2
                 ReusableAreaGraph
                 {
                     id: graph
                     width: parent.width
                     height: parent.height
+                    anchors.right: parent.right
+                    anchors.top: parent.top
+                    anchors.bottom: parent.bottom
+                    anchors.left: parent.left
                 }
             }
 
@@ -107,12 +111,13 @@ Row
                 anchors.topMargin: graphBoundaryBox.height - graphBoundaryBox.height/1.2
                 color: "black"
                 height: 4
-                width: graph.width + row.spacing + 8
+                width: graph.width + graphRow.spacing + 8
             }
         }
     }
     RowLayout
     {
+       id: rightLayout
        spacing: 8
         Image
         {
@@ -121,7 +126,7 @@ Row
         }
         ColumnLayout
         {
-            id: rightContainer
+            id: rightValueLayout
             spacing: 0
             Text
             {

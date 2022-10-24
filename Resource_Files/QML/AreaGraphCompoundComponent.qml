@@ -2,8 +2,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.3
 
-Row
-{
+Item {
     id: root
     //////////////////////////////////////////////////////
     // Properties
@@ -25,7 +24,7 @@ Row
     //////////////////////////////////////////////////////
     /// Creation
     //////////////////////////////////////////////////////
-    spacing: 8
+//    spacing: 8
 
     function onBackgroundDataChanged(newX, newY, newMaxValue)
     {
@@ -42,107 +41,150 @@ Row
 
     Column
     {
-        id: graphNameAndMaxLimitButtonLayout
-        width: 120
-        Text
-        {
-            id: graphDataName
-        }
-        Button
-        {
-            id: numberBox
-            text: "1.0%"
-            font.bold: true
-            padding: 0
-            background: Rectangle
-            {
-                color: "white"
-                border.color: "black"
-                border.width: 2
-            }
-            height: graph.height /2
-            width: 80
-        }
-    }
-    Item
-    {
-        id: wholeGraph
-        height: root.height
-        width: root.width - graphNameAndMaxLimitButtonLayout.implicitWidth - rightLayout.implicitWidth - 16 - 70
-//        anchors.left: graphNameAndMaxLimitButtonLayout.anchors.right
-        anchors.leftMargin: 70
+        anchors.fill: parent
         Row
         {
-            id: graphRow
-            anchors.fill: parent
-            spacing: 16
-            Rectangle
+            width: parent.width - rightLayout.width
+            height: graphDataName.height
+            Text
             {
-                id: graphBoundaryBox
-                border.color: "black"
-                color: "transparent"
+                id: graphDataName
+                width: parent.width - legendImagesContainer.width
+            }
+            Row
+            {
+                id: legendImagesContainer
                 height: parent.height
-                width: root.width / 2
-                ReusableAreaGraph
-                {
-                    id: graph
-                    width: parent.width
+    //            width: parent.height * 4
+
+                Image {
+                    id: backgroundDataIconLegend
+                    source: "qrc:///PFCApp/Resource_Files/Images/SpeedLimit_50x50.png"
                     height: parent.height
-                    anchors.right: parent.right
-                    anchors.top: parent.top
-                    anchors.bottom: parent.bottom
-                    anchors.left: parent.left
+                }
+                Image {
+                    id: backgroundDataFillPatternLegend
+                    source: "qrc:///PFCApp/Resource_Files/Images/SpeedLimit_50x50.png"
+                    height: parent.height
+                }
+                Image {
+                    id: foregroundDataIconLegend
+                    source: "qrc:///PFCApp/Resource_Files/Images/SpeedLimit_50x50.png"
+                    height: parent.height
+                    width: 25
+                }
+                Image {
+                    id: foregroundDataFillPatternLegend
+                    source: "qrc:///PFCApp/Resource_Files/Images/graph_fill_pattern.svg"
+                    height: parent.height
+                    width: 25
                 }
             }
+        }
 
-            Image
-            {
-                id: limitIcon
-                source: "qrc:///PFCApp/Resource_Files/Images/SpeedLimit_50x50.png"
-                anchors.verticalCenter: indicatorLine.verticalCenter
-                x: indicatorLine.x - 50
-            }
-            Rectangle
-            {
-                id: indicatorLine
-                anchors.left: numberBox.right
-                anchors.right: graphBoundaryBox.right
-                anchors.top: graphBoundaryBox.top
-                anchors.topMargin: graphBoundaryBox.height - graphBoundaryBox.height/1.2
-                color: "black"
-                height: 4
-                width: graph.width + graphRow.spacing + 8
-            }
-        }
-    }
-    RowLayout
-    {
-       id: rightLayout
-       spacing: 8
-        Image
+        Row
         {
-            source: "qrc:///PFCApp/Resource_Files/Images/SpeedLimit_50x50.png"
-            Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
-        }
-        ColumnLayout
-        {
-            id: rightValueLayout
-            spacing: 0
-            Text
+            Column
             {
-                id: valueText
-                text:"---"
-                font.pointSize: 22
-                font.bold: true
-                Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+                id: graphNameAndMaxLimitButtonLayout
+                width: 120
+                Button
+                {
+                    id: numberBox
+                    text: "1.0%"
+                    font.bold: true
+                    padding: 0
+                    background: Rectangle
+                    {
+                        color: "white"
+                        border.color: "black"
+                        border.width: 2
+                    }
+                    height: graph.height /2
+                    width: 80
+                }
             }
-            Text
+            Item
             {
-                id: unitsText
-                font.pointSize: 18
-                font.bold: true
-                Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
-                visible: text.length > 0
+                id: wholeGraph
+                height: root.height
+                width: root.width - graphNameAndMaxLimitButtonLayout.implicitWidth - rightLayout.implicitWidth - 16 - 70
+        //        anchors.left: graphNameAndMaxLimitButtonLayout.anchors.right
+                anchors.leftMargin: 70
+                Row
+                {
+                    id: graphRow
+                    anchors.fill: parent
+                    spacing: 16
+                    Rectangle
+                    {
+                        id: graphBoundaryBox
+                        border.color: "black"
+                        color: "transparent"
+                        height: parent.height
+                        width: root.width / 2
+                        ReusableAreaGraph
+                        {
+                            id: graph
+                            width: parent.width
+                            height: parent.height
+                            anchors.right: parent.right
+                            anchors.top: parent.top
+                            anchors.bottom: parent.bottom
+                            anchors.left: parent.left
+                        }
+                    }
+
+                    Image
+                    {
+                        id: limitIcon
+                        source: "qrc:///PFCApp/Resource_Files/Images/SpeedLimit_50x50.png"
+                        anchors.verticalCenter: indicatorLine.verticalCenter
+                        x: indicatorLine.x - 50
+                    }
+                    Rectangle
+                    {
+                        id: indicatorLine
+                        anchors.left: numberBox.right
+                        anchors.right: graphBoundaryBox.right
+                        anchors.top: graphBoundaryBox.top
+                        anchors.topMargin: graphBoundaryBox.height - graphBoundaryBox.height/1.2
+                        color: "black"
+                        height: 4
+                        width: graph.width + graphRow.spacing + 8
+                    }
+                }
+            }
+            RowLayout
+            {
+               id: rightLayout
+               spacing: 8
+                Image
+                {
+                    source: "qrc:///PFCApp/Resource_Files/Images/SpeedLimit_50x50.png"
+                    Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+                }
+                ColumnLayout
+                {
+                    id: rightValueLayout
+                    spacing: 0
+                    Text
+                    {
+                        id: valueText
+                        text:"---"
+                        font.pointSize: 22
+                        font.bold: true
+                        Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+                    }
+                    Text
+                    {
+                        id: unitsText
+                        font.pointSize: 18
+                        font.bold: true
+                        Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+                        visible: text.length > 0
+                    }
+                }
             }
         }
     }

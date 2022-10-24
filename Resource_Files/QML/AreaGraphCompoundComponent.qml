@@ -2,7 +2,8 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.3
 
-Item {
+Item
+{
     id: root
     //////////////////////////////////////////////////////
     // Properties
@@ -59,23 +60,27 @@ Item {
                 id: legendImagesContainer
                 height: parent.height
 
-                Image {
+                Image
+                {
                     id: backgroundDataIconLegend
                     height: parent.height
                     sourceSize: Qt.size(25, parent.height)
                 }
-                Image  {
+                Image
+                {
                     id: backgroundDataFillPatternLegend
                     height: parent.height
                     width: 25
                     sourceSize: Qt.size(25, parent.height)
                 }
-                Image {
+                Image
+                {
                     id: foregroundDataIconLegend
                     height: parent.height
                     sourceSize: Qt.size(25, parent.height)
                 }
-                Rectangle {
+                Rectangle
+                {
                     id: foregroundDataFillPatternLegend
                     height: parent.height
                     width: 25
@@ -104,9 +109,7 @@ Item {
             {
                 id: wholeGraph
                 height: root.height
-                width: root.width - numberBox.implicitWidth - rightLayout.implicitWidth - 16 - 70
-        //        anchors.left: graphNameAndMaxLimitButtonLayout.anchors.right
-//                anchors.leftMargin: 70
+                width: root.width - numberBox.implicitWidth - rightLayout.implicitWidth
                 Row
                 {
                     id: graphRow
@@ -130,7 +133,6 @@ Item {
                             anchors.left: parent.left
                         }
                     }
-
                     Image
                     {
                         id: limitIcon

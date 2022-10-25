@@ -60,12 +60,12 @@ private:
     QTimer* GraphDataTimer;
     QWidget* QMLContainer = nullptr;
     QPointF BrokenGrainDataPoint;
-    double BrokenGrainMaxValue = 1.2;
+    double BrokenGrainMaxValue = 0.0;
     QPointF GrainLossBackgroundDataValue;
     QPointF GrainLossForegroundDataValue;
-    double GrainLossMaxValue = 1.2;
+    double GrainLossMaxValue = 0.0;
     QPointF ForeignMaterialDataValue;
-    double ForeignMaterialMaxValue = 1.2;
+    double ForeignMaterialMaxValue = 0.0;
     QPointF ProductivityDataValue;
-    double ProductivityMaxValue = 1.2;
+    double ProductivityMaxValue = 0.0;
 };

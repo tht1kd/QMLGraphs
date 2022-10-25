@@ -15,9 +15,8 @@ namespace
 //TODO: create productivity section //DONE!
 //TODO: Cleaup QML
 //TODO: Ajay's request for this story, make runpage, no button clicking. Connect to all old data.
-//TODO: finish limit line icon for area series
-//TODO: finish line graph compound component sizing
-
+//TODO: finish limit line icon for area series //DONE!
+//TODO: finish area graph / line graph sizing issues.
 
 QMLDialog::QMLDialog(QWidget *parent)
     : QDialog(parent)

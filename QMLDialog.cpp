@@ -26,7 +26,7 @@ QMLDialog::QMLDialog(QWidget *parent)
     GraphDataTimer->setSingleShot(false);
     GraphDataTimer->setInterval(1000);
 
-    setWindowTitle("Look at These graphs, the represent the level of respect I get");
+    setWindowTitle("Level of hoots given");
     setMinimumSize(MAIN_DIALOG_WIDTH, MAIN_DIALOG_HEIGHT);
     QQuickView* qmlView = new QQuickView();
     qmlView->setResizeMode(QQuickView::SizeRootObjectToView);

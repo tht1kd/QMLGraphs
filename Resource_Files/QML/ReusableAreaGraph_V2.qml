@@ -2,7 +2,7 @@ import QtCharts 2.3
 import QtGraphicalEffects 1.15
 import QtQuick 2.12
 
-Rectangle
+Item
 {
     //////////////////////////////////////////////////////
     // Properties
@@ -18,14 +18,13 @@ Rectangle
     //////////////////////////////////////////////////////
     /// Sizing
     //////////////////////////////////////////////////////
-//    implicitHeight:
-//    implicitWidth:
+    implicitHeight: row.height
+    implicitWidth: limitIcon.width + column1Layout.width + column2Layout.width
     //////////////////////////////////////////////////////
     /// Creation
     //////////////////////////////////////////////////////
     id: root
 //    color: "transparent"
-    color: "green"
     function deleteOldData(series)
     {
         if(series.count >= 30)
@@ -64,13 +63,26 @@ Rectangle
     {
         return newX <= 1 ? " min" : " mins"
     }
-    Rectangle
+    Row
     {
-        id: boundaryBox
-        border.color: "black"
-        color: "blue"
-        width: root.width - limitIcon.width
-        height: root.height
+        id: row
+        height: Math.max(column1Layout.height, column2Layout.height)
+        width: limitIcon.width + column1Layout.width + column2Layout.width
+        Image
+        {
+            id: limitIcon
+            source: "qrc:///PFCApp/Resource_Files/Images/SpeedLimit_50x50.png"
+            y: indicatorLine.y
+        }
+        Column
+        {
+            id: column1Layout
+            width: parent.width - limitIcon.width - column2Layout.width
+            height: 80
+        Item
+        {
+            height: parent.height
+            width: parent.width - (parent.spacing + limitIcon.width)
 
         ChartView
         {
@@ -79,8 +91,8 @@ Rectangle
             backgroundRoundness: 0
             backgroundColor: "transparent"
             legend.visible: false
-            anchors { fill: parent; centerIn: parent; margins: -15}
-            margins { right: 0; bottom: 0; left: 0; top: 0 }
+            height: 60
+            width: parent.width - 16
             ValueAxis
             {
                 id: valueXAxis
@@ -120,68 +132,86 @@ Rectangle
                 borderColor: "#D7D4B8"
                 upperSeries: LineSeries {}
             }
+        }
+        Rectangle
+        {
+            id: indicatorLine
+            anchors.left: limitIcon.right
+            anchors.right: boundaryBox.right
+            anchors.top: boundaryBox.top
+            anchors.topMargin: boundaryBox.height - boundaryBox.height/1.2
+            color: "black"
+            height: 4
+            width: parent.width
+        }
+        Rectangle
+        {
+            id: valueXAxisLegendLayout
+//                x: chartView.plotArea.x
+            y: chartView.plotArea.y + chartView.plotArea.height + 5
+            width: chartView.plotArea.width
+            anchors.left: chartView.left
+            anchors.right: chartView.right
+            anchors.horizontalCenter: chartView.plotArea.Center
+            height: 20
+            color: "red"
             Rectangle
             {
-                id: valueXAxisLegendLayout
-//                x: chartView.plotArea.x
-                y: chartView.plotArea.y + chartView.plotArea.height + 5
-                width: chartView.plotArea.width
-                anchors.left: chartView.left
-                anchors.right: chartView.right
-                anchors.horizontalCenter: chartView.plotArea.Center
-                height: 20
-                color: "red"
-                Rectangle
+                height: parent.height
+                x: valueXAxisLegendLayout.x
+                anchors.left: parent.left
+                width: 50
+                color: "transparent"
+                Text
                 {
-                    height: parent.height
-                    x: valueXAxisLegendLayout.x
-                    anchors.left: parent.left
-                    width: 50
-                    color: "transparent"
-                    Text
-                    {
-                        id: axisMaxLegend
+                    id: axisMaxLegend
 //                        anchors.fill: parent
-                        height: parent.height
-                        horizontalAlignment: Text.AlignLeft
-                    }
-                }
-                Rectangle
-                {
                     height: parent.height
-                    width: 50
-                    x: valueXAxisLegendLayout.x + parseInt(valueXAxisLegendLayout.width/2)
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    color: "transparent"
-                    Text
-                    {
-                        id: axisMidLegend
-                        anchors.fill: parent
-                        height: parent.height
-                        horizontalAlignment: Text.AlignHCenter
-                    }
-                }
-                Rectangle
-                {
-                    anchors.right: parent.right
-                    height: parent.height
-                    width: 50
-                    color: "transparent"
-                    Text
-                    {
-                        text: "0"
-                        anchors.fill: parent
-                        height: parent.height
-                        horizontalAlignment: Text.AlignRight
-                    }
+                    horizontalAlignment: Text.AlignLeft
                 }
             }
+            Rectangle
+            {
+                height: parent.height
+                width: 50
+                x: valueXAxisLegendLayout.x + parseInt(valueXAxisLegendLayout.width/2)
+                anchors.horizontalCenter: parent.horizontalCenter
+                color: "transparent"
+                Text
+                {
+                    id: axisMidLegend
+                    anchors.fill: parent
+                    height: parent.height
+                    horizontalAlignment: Text.AlignHCenter
+                }
+            }
+            Rectangle
+            {
+                anchors.right: parent.right
+                height: parent.height
+                width: 50
+                color: "transparent"
+                Text
+                {
+                    text: "0"
+                    anchors.fill: parent
+                    height: parent.height
+                    horizontalAlignment: Text.AlignRight
+                }
+            }
+        }
+        }
+    }
+        Column
+        {
+            id: column2Layout
+            width: valueYAxisLegendLayout.width
             Rectangle
             {
                 id: valueYAxisLegendLayout
 //                x: chartView.plotArea.x + chartView.plotArea.width + 4
 //                y: chartView.plotArea.y - 8
-                width: 50
+                width: axisYMaxLegend.width
                 anchors.left: chartView.right
                 anchors.right: root.right
                 anchors.top: chartView.top
@@ -193,7 +223,7 @@ Rectangle
                 {
                     height: 20
                     anchors.top: parent.top
-                    width: parent.width
+                    width: axisYMaxLegend.width
                     color: "transparent"
                     Text
                     {
@@ -206,7 +236,7 @@ Rectangle
                 {
                     anchors.bottom: parent.bottom
                     height: 20
-                    width: parent.width
+                    width: axisYMaxLegend.width
                     color: "transparent"
                     Text
                     {
@@ -215,23 +245,6 @@ Rectangle
                     }
                 }
             }
-        }
-        Image
-        {
-            id: limitIcon
-            source: "qrc:///PFCApp/Resource_Files/Images/SpeedLimit_50x50.png"
-            anchors.verticalCenter: indicatorLine.verticalCenter
-            anchors.right: boundaryBox.left
-        }
-        Rectangle
-        {
-            id: indicatorLine
-            anchors.left: limitIcon.right
-            anchors.right: boundaryBox.right
-            anchors.top: boundaryBox.top
-            anchors.topMargin: boundaryBox.height - boundaryBox.height/1.2
-            color: "black"
-            height: 4
         }
     }
 }

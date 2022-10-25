@@ -206,12 +206,12 @@ Rectangle
         id: limitIcon
         source: "qrc:///PFCApp/Resource_Files/Images/SpeedLimit_50x50.png"
         anchors.verticalCenter: indicatorLine.verticalCenter
-        anchors.left: root.left
+        anchors.right: root.left
     }
     Rectangle
     {
         id: indicatorLine
-        anchors.left: root.left
+        anchors.left: limitIcon.right
         anchors.right: root.right
         anchors.top: root.top
         anchors.topMargin: root.height - root.height/1.2

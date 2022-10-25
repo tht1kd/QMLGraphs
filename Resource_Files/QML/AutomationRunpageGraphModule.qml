@@ -9,7 +9,8 @@ Rectangle
     {
         id: layout
         anchors.fill: parent
-        spacing:0
+        spacing:8
+        Layout.bottomMargin: 8
         Rectangle
         {
             id: productivityDivider

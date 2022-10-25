@@ -109,7 +109,7 @@ Rectangle
             axisX: valueXAxis
             axisYRight: valueYAxis
         }
-        Row
+        Rectangle
         {
             id: valueXAxisLegendLayout
             x: chartView.plotArea.x
@@ -117,6 +117,7 @@ Rectangle
             width: chartView.plotArea.width
             anchors.horizontalCenter: chartView.plotArea.Center
             height: 20
+            color: "transparent"
             Rectangle
             {
                 height: parent.height
@@ -159,7 +160,7 @@ Rectangle
                 }
             }
         }
-        Column
+        Rectangle
         {
             id: valueYAxisLegendLayout
             x: chartView.plotArea.x + chartView.plotArea.width + 4
@@ -167,6 +168,7 @@ Rectangle
             width: 50
             anchors.horizontalCenter: chartView.plotArea.Center
             height: chartView.plotArea.height + 8
+            color: "transparent"
             Rectangle
             {
                 height: 20

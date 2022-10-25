@@ -49,10 +49,9 @@ Row
     Column
     {
         id: graphNameAndLegendLayout
-        anchors.fill: parent
         Row
         {
-            width: parent.width - rightLayout.width
+            width: legendImagesContainer.width - 8 + graph.width
             height: graphDataName.height
             Text
             {

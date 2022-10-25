@@ -48,6 +48,7 @@ Row
 
     Column
     {
+        id: graphNameAndLegendLayout
         anchors.fill: parent
         Row
         {
@@ -107,12 +108,12 @@ Row
                     border.width: 2
                 }
                 height: graph.height /2
-                width: 80
+                width: 90
             }
             ReusableAreaGraph
             {
                 id: graph
-                width: root.width - numberBox.implicitWidth - rightLayout.implicitWidth - 16
+                width: root.width - numberBox.width - rightLayout.implicitWidth - 16
                 height: parent.height
             }
             RowLayout

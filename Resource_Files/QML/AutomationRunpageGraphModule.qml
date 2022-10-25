@@ -29,10 +29,11 @@ Rectangle
             id: productivityGraph
             graphSeries1Color: "black"
             Layout.fillWidth: true
+            Layout.fillHeight: true
             Layout.leftMargin: 8
             Layout.rightMargin: 8
             Layout.minimumHeight: 100
-            Layout.maximumHeight: 200
+            Layout.maximumHeight: layout.height / 7 + (6*8)
             Connections
             {
                 target: pfcData
@@ -60,7 +61,9 @@ Rectangle
         {
             id: grainLossGraph
             Layout.fillWidth: true
+            Layout.fillHeight: true
             Layout.minimumHeight: 100
+            Layout.maximumHeight: layout.height / 7 + (6*8)
             Layout.leftMargin: 8
             Layout.rightMargin: 8
             graphBackgroundDataBrush: ":/PFCApp/Resource_Files/Images/graph_fill_pattern.svg"
@@ -90,7 +93,9 @@ Rectangle
         {
             id: foreignMaterialGraph
             Layout.fillWidth: true
+            Layout.fillHeight: true
             Layout.minimumHeight: 100
+            Layout.maximumHeight: layout.height / 7 + (6*8)
             Layout.leftMargin: 8
             Layout.rightMargin: 8
             graphForegroundDataColor: "#D7D4B8"
@@ -110,9 +115,12 @@ Rectangle
         {
             id: brokenGrainGraph
             Layout.fillWidth: true
+            Layout.fillHeight: true
             Layout.minimumHeight: 100
+            Layout.maximumHeight: layout.height / 7 + (6*8)
             Layout.leftMargin: 8
             Layout.rightMargin: 8
+            Layout.bottomMargin: 8
             graphForegroundDataColor: "#D7D4B8"
             graphForegroundDataName: "Broken Grain"
             graphName: "Broken Grain"

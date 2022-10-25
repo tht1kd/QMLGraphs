@@ -45,7 +45,7 @@ Row
         {
             id: speedLimit
             height: speedLimitLayout.implicitHeight
-            width: parent.width
+            width: parent.width - 8
             background: Rectangle
             {
                 color: "white"
@@ -56,18 +56,22 @@ Row
             {
                 id: speedLimitLayout
                 width:parent.width
+                spacing: 0
                 Image
                 {
                     source: "qrc:///PFCApp/Resource_Files/Images/SpeedLimit_50x50.png"
                 }
                 ColumnLayout
                 {
+                    spacing:0
                     Text
                     {
                         id: speedLimitValue
                         font.pointSize: 12
                         font.bold: true
                         text: "6.5"
+                        Layout.rightMargin: 8
+                        Layout.fillWidth: true
                    }
                     Text
                     {
@@ -75,6 +79,9 @@ Row
                         font.pointSize: 10
                         font.bold: true
                         text: "mi/h"
+                        verticalAlignment: Qt.AlignTop
+                        Layout.rightMargin: 8
+                        Layout.fillWidth: true
                    }
                 }
             }
@@ -85,7 +92,7 @@ Row
             Layout.alignment: Qt.AlignLeft | Qt.AlignBaseline
             Layout.fillWidth: true
             height: powerLimitLayout.implicitHeight
-            width: parent.width
+            width: parent.width - 8
             background: Rectangle
             {
                 color: "white"
@@ -96,18 +103,22 @@ Row
             {
                 id: powerLimitLayout
                 width:parent.width
+                spacing: 0
                 Image
                 {
                     source: "qrc:///PFCApp/Resource_Files/Images/SpeedLimit_50x50.png"
                 }
                 ColumnLayout
                 {
+                    spacing:0
                     Text
                     {
                         id: powerLimitValue
                         font.pointSize: 12
                         font.bold: true
                         text: "105"
+                        Layout.rightMargin: 8
+                        Layout.fillWidth: true
                    }
                     Text
                     {
@@ -115,6 +126,8 @@ Row
                         font.pointSize: 10
                         font.bold: true
                         text: "%"
+                        Layout.rightMargin: 8
+                        Layout.fillWidth: true
                    }
                 }
             }
@@ -123,15 +136,15 @@ Row
     ReusableLineGraph
     {
         id: graph
-        width: root.width - leftButtonsLayout.implicitWidth - rightLayout.width - 16
+        width: root.width - leftButtonsLayout.width - rightLayout.width - 16
         height: parent.height
     }
     ColumnLayout
     {
         spacing: 8
         id: rightLayout
+        width: 120
         height: root.height
-        width: 100
         Button
         {
             id: productivityButton
@@ -141,8 +154,8 @@ Row
                 border.color: "black"
                 border.width: 2
             }
-            width: parent.width
-            height: graph.height / 2
+            width: parent.width - 8
+            height: parent.height / 2.5
             Layout.preferredHeight: productivityButtonLayout.implicitHeight
             Layout.fillHeight: false
             Layout.fillWidth: true
@@ -151,8 +164,6 @@ Row
             {
                 id: productivityButtonLayout
                 spacing: 0
-                width: parent.width
-                Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
                 Text
                 {
                     id: valueText

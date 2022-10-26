@@ -65,138 +65,144 @@ Rectangle
     {
         return newX <= 1 ? " min" : " mins"
     }
-
-    ChartView
+    Rectangle
     {
-        id: chartView
-        anchors.fill: parent
-        antialiasing: true
-        backgroundRoundness: 0
-        backgroundColor: "transparent"
-        legend.visible: false
-        anchors { fill: parent; centerIn: parent; margins: -15}
-        margins { right: 0; bottom: 0; left: 0; top: 0 }
-        ValueAxis
+        id: boundingBox
+        color: "blue"
+        height: root.width - valueXAxisLegendLayout.width
+        width: root.width - limitIcon.width - valueYAxisLegendLayout.width
+        ChartView
         {
-            id: valueXAxis
-            gridVisible: false
-            reverse: false
-            min: 0
-            max: 30
-            tickCount: 3
-            labelsVisible: false
-            color: "gray"
-            visible:false
-        }
-        ValueAxis
-        {
-            id: valueYAxis
-            gridVisible: false
-            min: 0
-            max: 1.2
-            tickCount: 2
-            labelsVisible: false
-            color: "gray"
-            visible: false
-        }
-        AreaSeries
-        {
-            id: backgroundData
-            axisX: valueXAxis
-            axisYRight: valueYAxis
-            borderColor: "#BFBD99"
-            upperSeries: LineSeries {}
-        }
-        AreaSeries
-        {
-            id: foregroundData
-            axisX: valueXAxis
-            axisYRight: valueYAxis
-            borderColor: "#D7D4B8"
-            upperSeries: LineSeries {}
-        }
-        Rectangle
-        {
-            id: valueXAxisLegendLayout
-            x: chartView.plotArea.x
-            y: chartView.plotArea.y + chartView.plotArea.height + 4
-            width: chartView.plotArea.width
-            anchors.horizontalCenter: chartView.plotArea.Center
-            height: Math.max(xAxisMaxLegendWrapper.height, xAxisMidLegendWrapper.height)
-            color: "red"
+            id: chartView
+            anchors.fill: parent
+            antialiasing: true
+            backgroundRoundness: 0
+            backgroundColor: "transparent"
+            legend.visible: false
+            anchors { fill: parent; centerIn: parent; margins: -15}
+            margins { right: 0; bottom: 0; left: 0; top: 0 }
+            ValueAxis
+            {
+                id: valueXAxis
+                gridVisible: false
+                reverse: false
+                min: 0
+                max: 30
+                tickCount: 3
+                labelsVisible: false
+                color: "gray"
+                visible:false
+            }
+            ValueAxis
+            {
+                id: valueYAxis
+                gridVisible: false
+                min: 0
+                max: 1.2
+                tickCount: 2
+                labelsVisible: false
+                color: "gray"
+                visible: false
+            }
+            AreaSeries
+            {
+                id: backgroundData
+                axisX: valueXAxis
+                axisYRight: valueYAxis
+                borderColor: "#BFBD99"
+                upperSeries: LineSeries {}
+            }
+            AreaSeries
+            {
+                id: foregroundData
+                axisX: valueXAxis
+                axisYRight: valueYAxis
+                borderColor: "#D7D4B8"
+                upperSeries: LineSeries {}
+            }
             Rectangle
             {
-                id: xAxisMaxLegendWrapper
-                height: xAxisMaxLegend.height
-                x: valueXAxisLegendLayout.x
-                anchors.left: parent.left
-                width: xAxisMaxLegend.width
-                color: "transparent"
-                Text
+                id: valueXAxisLegendLayout
+                x: chartView.plotArea.x
+                y: chartView.plotArea.y + chartView.plotArea.height + 4
+                width: chartView.plotArea.width
+                anchors.horizontalCenter: chartView.plotArea.Center
+                height: Math.max(xAxisMaxLegendWrapper.height, xAxisMidLegendWrapper.height)
+                color: "red"
+                Rectangle
                 {
-                    id: xAxisMaxLegend
-                    horizontalAlignment: Text.AlignLeft
+                    id: xAxisMaxLegendWrapper
+                    height: xAxisMaxLegend.height
+                    x: valueXAxisLegendLayout.x
+                    anchors.left: parent.left
+                    width: xAxisMaxLegend.width
+                    color: "transparent"
+                    Text
+                    {
+                        id: xAxisMaxLegend
+                        horizontalAlignment: Text.AlignLeft
+                    }
+                }
+                Rectangle
+                {
+                    id: xAxisMidLegendWrapper
+                    height: xAxisMidLegend.height
+                    width: xAxisMidLegend.width
+                    x: valueXAxisLegendLayout.x + parseInt(valueXAxisLegendLayout.width/2)
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    color: "transparent"
+                    Text
+                    {
+                        id: xAxisMidLegend
+                        horizontalAlignment: Text.AlignHCenter
+                    }
+                }
+                Rectangle
+                {
+                    anchors.right: parent.right
+                    height: parent.height
+                    width: xAxisOriginLegend.width
+                    color: "transparent"
+                    Text
+                    {
+                        id: xAxisOriginLegend
+                        text: "0"
+                        horizontalAlignment: Text.AlignRight
+                    }
                 }
             }
             Rectangle
             {
-                id: xAxisMidLegendWrapper
-                height: xAxisMidLegend.height
-                width: xAxisMidLegend.width
-                x: valueXAxisLegendLayout.x + parseInt(valueXAxisLegendLayout.width/2)
-                anchors.horizontalCenter: parent.horizontalCenter
-                color: "transparent"
-                Text
+                id: valueYAxisLegendLayout
+                x: chartView.plotArea.x + chartView.plotArea.width + 4
+                y: chartView.plotArea.y - 4
+                width: 50
+                height: chartView.plotArea.height + 8
+                color: "red"
+                Rectangle
                 {
-                    id: xAxisMidLegend
-                    horizontalAlignment: Text.AlignHCenter
+                    height: 20
+                    anchors.top: parent.top
+                    width: parent.width
+                    color: "transparent"
+                    Text
+                    {
+                        id: yAxisMaxLegend
+                        anchors.fill: parent
+                        verticalAlignment: Text.AlignTop
+                    }
                 }
-            }
-            Rectangle
-            {
-                anchors.right: parent.right
-                height: parent.height
-                width: xAxisOriginLegend.width
-                color: "transparent"
-                Text
+                Rectangle
                 {
-                    id: xAxisOriginLegend
-                    text: "0"
-                    horizontalAlignment: Text.AlignRight
-                }
-            }
-        }
-        Rectangle
-        {
-            id: valueYAxisLegendLayout
-            x: chartView.plotArea.x + chartView.plotArea.width + 4
-            y: chartView.plotArea.y - 4
-            width: 50
-            height: chartView.plotArea.height + 8
-            color: "red"
-            Rectangle
-            {
-                height: 20
-                anchors.top: parent.top
-                width: parent.width
-                color: "transparent"
-                Text
-                {
-                    id: yAxisMaxLegend
-                    anchors.fill: parent
-                    verticalAlignment: Text.AlignTop
-                }
-            }
-            Rectangle
-            {
-                anchors.bottom: parent.bottom
-                height: 20
-                width: parent.width
-                color: "transparent"
-                Text
-                {
-                    text: "0"
-                    anchors.fill: parent
+                    anchors.bottom: parent.bottom
+                    height: 20
+                    width: parent.width
+                    color: "transparent"
+                    Text
+                    {
+                        text: "0"
+                        anchors.fill: parent
+                    }
                 }
             }
         }
@@ -206,7 +212,7 @@ Rectangle
         id: limitIcon
         source: "qrc:///PFCApp/Resource_Files/Images/SpeedLimit_50x50.png"
         anchors.verticalCenter: indicatorLine.verticalCenter
-        anchors.right: root.left
+        anchors.right: boundingBox.left + limitIcon.width
     }
     Rectangle
     {

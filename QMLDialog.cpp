@@ -18,7 +18,6 @@ namespace
 //TODO: finish limit line icon for area series
 //TODO: finish line graph compound component sizing
 
-
 QMLDialog::QMLDialog(QWidget *parent)
     : QDialog(parent)
     , GraphDataTimer(new QTimer(this))
@@ -26,7 +25,7 @@ QMLDialog::QMLDialog(QWidget *parent)
     GraphDataTimer->setSingleShot(false);
     GraphDataTimer->setInterval(1000);
 
-    setWindowTitle("Look at These graphs, the represent the level of respect I get");
+    setWindowTitle("Look at These graphs");
     setMinimumSize(MAIN_DIALOG_WIDTH, MAIN_DIALOG_HEIGHT);
     QQuickView* qmlView = new QQuickView();
     qmlView->setResizeMode(QQuickView::SizeRootObjectToView);

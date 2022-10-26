@@ -28,7 +28,7 @@ Rectangle
         LineGraphCompoundComponent
         {
             id: productivityGraph
-            graphSeries1Color: "#80000000" //for some reason, black does not always work.... this sets it to black though.
+            graphSeries1Color: "black"
             Layout.fillWidth: true
             Layout.fillHeight: true
             Layout.leftMargin: 8

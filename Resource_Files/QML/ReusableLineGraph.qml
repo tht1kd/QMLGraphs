@@ -22,7 +22,7 @@ Rectangle
     /// Creation
     //////////////////////////////////////////////////////
     id: root
-    color: "green"
+    color: "transparent"
 
     function deleteOldData(series)
     {
@@ -65,7 +65,8 @@ Rectangle
     Rectangle
     {
         id: boundingBox
-        color: "blue"
+        color: "white"
+        border.color: "black"
         height: root.height - valueXAxisLegendLayout.height
         width: root.width - valueYAxisLegendLayout.width
         ChartView
@@ -123,7 +124,7 @@ Rectangle
                 width: chartView.plotArea.width
                 anchors.horizontalCenter: chartView.plotArea.Center
                 height: Math.max(xAxisMaxLegendWrapper.height, xAxisMidLegendWrapper.height)
-                color: "red"
+                color: "transparent"
                 Rectangle
                 {
                     id: xAxisMaxLegendWrapper
@@ -173,7 +174,7 @@ Rectangle
                 y: chartView.plotArea.y - 4
                 width: Math.max(yAxisMaxLegendWrapper.width, yAxisOriginLegendWrapper.width) + 8
                 height: chartView.plotArea.height + 8
-                color: "red"
+                color: "transparent"
                 Rectangle
                 {
                     id: yAxisMaxLegendWrapper

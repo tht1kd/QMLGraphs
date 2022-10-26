@@ -24,7 +24,6 @@ Rectangle
     /// Creation
     //////////////////////////////////////////////////////
     id: root
-    border.color: "black"
     color: "green"
 
     function deleteOldData(series)
@@ -69,8 +68,9 @@ Rectangle
     {
         id: boundingBox
         color: "blue"
-        height: root.width - valueXAxisLegendLayout.width
+        height: root.height - valueXAxisLegendLayout.height
         width: root.width - limitIcon.width - valueYAxisLegendLayout.width
+        x: limitIcon.width
         ChartView
         {
             id: chartView
@@ -212,13 +212,13 @@ Rectangle
         id: limitIcon
         source: "qrc:///PFCApp/Resource_Files/Images/SpeedLimit_50x50.png"
         anchors.verticalCenter: indicatorLine.verticalCenter
-        anchors.right: boundingBox.left + limitIcon.width
+        anchors.left: root.left
     }
     Rectangle
     {
         id: indicatorLine
         anchors.left: limitIcon.right
-        anchors.right: root.right
+        anchors.right: boundingBox.right
         anchors.top: root.top
         anchors.topMargin: root.height - root.height/1.2
         color: "black"

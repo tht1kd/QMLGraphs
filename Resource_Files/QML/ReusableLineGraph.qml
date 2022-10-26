@@ -40,7 +40,6 @@ Rectangle
     }
     function setNewData(series, newX, newY, maxData)
     {
-        console.log("series 1 color: ", series1.color)
         series.append(newX+30, newY)
         valueXAxis.min = series.at(0).x
         valueXAxis.max = series.at(series.count-1).x
@@ -69,7 +68,6 @@ Rectangle
         color: "blue"
         height: root.height - valueXAxisLegendLayout.height
         width: root.width - valueYAxisLegendLayout.width
-        x: limitIcon.width
         ChartView
         {
             id: chartView

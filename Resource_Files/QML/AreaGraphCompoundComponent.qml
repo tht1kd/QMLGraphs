@@ -45,14 +45,14 @@ Row
         graph.setNewData(graph.foregroundData, newX, newY, newMaxValue)
         valueText.text = parseFloat(newY).toFixed(1)
     }
-
     Column
     {
         id: graphNameAndLegendLayout
         Row
         {
-            width: legendImagesContainer.width - 8 + graph.width
+            width: legendImagesContainer.width - 8 + graph.width - 56
             height: graphDataName.height
+            spacing: 8
             Text
             {
                 id: graphDataName
@@ -62,7 +62,6 @@ Row
             {
                 id: legendImagesContainer
                 height: parent.height
-
                 Image
                 {
                     id: backgroundDataIconLegend

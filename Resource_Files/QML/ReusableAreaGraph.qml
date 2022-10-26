@@ -160,7 +160,7 @@ Rectangle
                 Rectangle
                 {
                     anchors.right: parent.right
-                    height: parent.height
+                    height: xAxisOriginLegend.height
                     width: xAxisOriginLegend.width
                     color: "transparent"
                     Text
@@ -176,32 +176,33 @@ Rectangle
                 id: valueYAxisLegendLayout
                 x: chartView.plotArea.x + chartView.plotArea.width + 4
                 y: chartView.plotArea.y - 4
-                width: 50
+                width: Math.max(yAxisMaxLegendWrapper.width, yAxisOriginLegendWrapper.width) + 8
                 height: chartView.plotArea.height + 8
                 color: "red"
                 Rectangle
                 {
-                    height: 20
+                    id: yAxisMaxLegendWrapper
+                    height: yAxisMaxLegend.height
                     anchors.top: parent.top
-                    width: parent.width
+                    width: yAxisMaxLegend.width
                     color: "transparent"
                     Text
                     {
                         id: yAxisMaxLegend
-                        anchors.fill: parent
                         verticalAlignment: Text.AlignTop
                     }
                 }
                 Rectangle
                 {
+                    id: yAxisOriginLegendWrapper
                     anchors.bottom: parent.bottom
-                    height: 20
-                    width: parent.width
+                    height: yAxisOriginLegend.height
+                    width: yAxisOriginLegend.width
                     color: "transparent"
                     Text
                     {
+                        id: yAxisOriginLegend
                         text: "0"
-                        anchors.fill: parent
                     }
                 }
             }

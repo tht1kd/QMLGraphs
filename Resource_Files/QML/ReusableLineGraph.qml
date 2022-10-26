@@ -11,19 +11,18 @@ Rectangle
     property alias series1Name: series1.name
     property alias series2Color: series2.color
     property alias series2Name: series2.name
-    property alias series1: series1
-    property alias series2: series2
+    property alias exposedSeries1: series1
+    property alias exposedSeries2: series2
     //////////////////////////////////////////////////////
     /// Sizing
     //////////////////////////////////////////////////////
-    //implicitHeight:
-    //implicitWidth:
+    implicitHeight: chartView.height + valueXAxisLegendLayout.height
+    implicitWidth: chartView.width + valueYAxisLegendLayout.width + 16
     //////////////////////////////////////////////////////
     /// Creation
     //////////////////////////////////////////////////////
     id: root
-    border.color: "black"
-    color: "transparent"
+    color: "green"
 
     function deleteOldData(series)
     {
@@ -41,19 +40,20 @@ Rectangle
     }
     function setNewData(series, newX, newY, maxData)
     {
+        console.log("series 1 color: ", series1.color)
         series.append(newX+30, newY)
         valueXAxis.min = series.at(0).x
         valueXAxis.max = series.at(series.count-1).x
         valueYAxis.max = maxData
-        axisYMaxLegend.text = (maxData).toFixed(1);
+        yAxisMaxLegend.text = (maxData).toFixed(1);
         updateXAxis(30)
     }
     function updateXAxis(newX)
     {
         var maxAxisValue = getAxisValue(newX, false);
         var midAxisValue = getAxisValue(newX, true);
-        axisMidLegend.text = midAxisValue
-        axisMaxLegend.text = maxAxisValue + getAxisUnit(midAxisValue)
+        xAxisMidLegend.text = midAxisValue
+        xAxisMaxLegend.text = maxAxisValue + getAxisUnit(midAxisValue)
     }
     function getAxisValue(newXValue, isMidpoint)
     {
@@ -63,138 +63,147 @@ Rectangle
     {
         return newX <= 1 ? " min" : " mins"
     }
-
-    ChartView
+    Rectangle
     {
-        id: chartView
-        anchors.fill: parent
-        antialiasing: true
-        backgroundRoundness: 0
-        backgroundColor: "transparent"
-        legend.visible: false
-        anchors { fill: parent; centerIn: parent; margins: -15}
-        margins { right: 0; bottom: 0; left: 0; top: 0 }
-        ValueAxis
+        id: boundingBox
+        color: "blue"
+        height: root.height - valueXAxisLegendLayout.height
+        width: root.width - valueYAxisLegendLayout.width
+        x: limitIcon.width
+        ChartView
         {
-            id: valueXAxis
-            gridVisible: false
-            reverse: false
-            min: 0
-            max: 30
-            tickCount: 3
-            labelsVisible: false
-            color: "gray"
-            visible:false
-        }
-        ValueAxis
-        {
-            id: valueYAxis
-            gridVisible: false
-            min: 0
-            max: 1.2
-            tickCount: 2
-            labelsVisible: false
-            color: "gray"
-            visible: false
-        }
-        SplineSeries
-        {
-            id: series1
-            axisX: valueXAxis
-            axisYRight: valueYAxis
-        }
-        SplineSeries
-        {
-            id: series2
-            axisX: valueXAxis
-            axisYRight: valueYAxis
-        }
-        Rectangle
-        {
-            id: valueXAxisLegendLayout
-            x: chartView.plotArea.x
-            y: chartView.plotArea.y + chartView.plotArea.height + 5
-            width: chartView.plotArea.width
-            anchors.horizontalCenter: chartView.plotArea.Center
-            height: 20
-            color: "transparent"
+            id: chartView
+            anchors.fill: parent
+            antialiasing: true
+            backgroundRoundness: 0
+            backgroundColor: "transparent"
+            legend.visible: false
+            anchors { fill: parent; centerIn: parent; margins: -15}
+            margins { right: 0; bottom: 0; left: 0; top: 0 }
+            ValueAxis
+            {
+                id: valueXAxis
+                gridVisible: false
+                reverse: false
+                min: 0
+                max: 30
+                tickCount: 3
+                labelsVisible: false
+                color: "gray"
+                visible:false
+            }
+            ValueAxis
+            {
+                id: valueYAxis
+                gridVisible: false
+                min: 0
+                max: 1.2
+                tickCount: 2
+                labelsVisible: false
+                color: "gray"
+                visible: false
+            }
+            SplineSeries
+            {
+                id: series1
+                axisX: valueXAxis
+                axisYRight: valueYAxis
+                width: 3
+            }
+            SplineSeries
+            {
+                id: series2
+                axisX: valueXAxis
+                axisYRight: valueYAxis
+                width: 3
+            }
             Rectangle
             {
-                height: parent.height
-                x: valueXAxisLegendLayout.x
-                anchors.left: parent.left
-                width: 50
-                color: "transparent"
-                Text
+                id: valueXAxisLegendLayout
+                x: chartView.plotArea.x
+                y: chartView.plotArea.y + chartView.plotArea.height + 4
+                width: chartView.plotArea.width
+                anchors.horizontalCenter: chartView.plotArea.Center
+                height: Math.max(xAxisMaxLegendWrapper.height, xAxisMidLegendWrapper.height)
+                color: "red"
+                Rectangle
                 {
-                    id: axisMaxLegend
-                    anchors.fill: parent
-                    horizontalAlignment: Text.AlignLeft
+                    id: xAxisMaxLegendWrapper
+                    height: xAxisMaxLegend.height
+                    x: valueXAxisLegendLayout.x
+                    anchors.left: parent.left
+                    width: xAxisMaxLegend.width
+                    color: "transparent"
+                    Text
+                    {
+                        id: xAxisMaxLegend
+                        horizontalAlignment: Text.AlignLeft
+                    }
+                }
+                Rectangle
+                {
+                    id: xAxisMidLegendWrapper
+                    height: xAxisMidLegend.height
+                    width: xAxisMidLegend.width
+                    x: valueXAxisLegendLayout.x + parseInt(valueXAxisLegendLayout.width/2)
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    color: "transparent"
+                    Text
+                    {
+                        id: xAxisMidLegend
+                        horizontalAlignment: Text.AlignHCenter
+                    }
+                }
+                Rectangle
+                {
+                    anchors.right: parent.right
+                    height: parent.height
+                    width: xAxisOriginLegend.width
+                    color: "transparent"
+                    Text
+                    {
+                       id: xAxisOriginLegend
+                       text: "0"
+                       horizontalAlignment: Text.AlignRight
+                    }
                 }
             }
             Rectangle
             {
-                height: parent.height
-                width: 50
-                x: valueXAxisLegendLayout.x + parseInt(valueXAxisLegendLayout.width/2)
-                anchors.horizontalCenter: parent.horizontalCenter
-                color: "transparent"
-                Text
+                id: valueYAxisLegendLayout
+                x: chartView.plotArea.x + chartView.plotArea.width + 4
+                y: chartView.plotArea.y - 4
+                width: Math.max(yAxisMaxLegendWrapper.width, yAxisOriginLegendWrapper.width) + 8
+                height: chartView.plotArea.height + 8
+                color: "red"
+                Rectangle
                 {
-                    id: axisMidLegend
-                    anchors.fill: parent
-                    horizontalAlignment: Text.AlignHCenter
+                    id: yAxisMaxLegendWrapper
+                    height: yAxisMaxLegend.height
+                    anchors.top: parent.top
+                    width: yAxisMaxLegend.width
+                    color: "transparent"
+                    Text
+                    {
+                        id: yAxisMaxLegend
+                        verticalAlignment: Text.AlignTop
+                    }
+                }
+                Rectangle
+                {
+                    id: yAxisOriginLegendWrapper
+                    anchors.bottom: parent.bottom
+                    height: yAxisOriginLegend.height
+                    width: yAxisOriginLegend.width
+                    color: "transparent"
+                    Text
+                    {
+                        id: yAxisOriginLegend
+                        text: "0"
+                    }
                 }
             }
-            Rectangle
-            {
-                anchors.right: parent.right
-                height: parent.height
-                width: 50
-                color: "transparent"
-                Text
-                {
-                    text: "0"
-                    anchors.fill: parent
-                    horizontalAlignment: Text.AlignRight
-                }
-            }
-        }
-        Rectangle
-        {
-            id: valueYAxisLegendLayout
-            x: chartView.plotArea.x + chartView.plotArea.width + 4
-            y: chartView.plotArea.y - 8
-            width: 50
-            anchors.horizontalCenter: chartView.plotArea.Center
-            height: chartView.plotArea.height + 8
-            color: "transparent"
-            Rectangle
-            {
-                height: 20
-                anchors.top: parent.top
-                width: parent.width
-                color: "transparent"
-                Text
-                {
-                    id: axisYMaxLegend
-                    anchors.fill: parent
-                    verticalAlignment: Text.AlignTop
-                }
-            }
-            Rectangle
-            {
-                anchors.bottom: parent.bottom
-                height: 20
-                width: parent.width
-                color: "transparent"
-                Text
-                {
-                    text: "0"
-                    anchors.fill: parent
-                }
-            }
-        }
+	    }
     }
 }
 /*##^##

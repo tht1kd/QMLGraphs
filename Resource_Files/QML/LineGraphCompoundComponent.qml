@@ -25,14 +25,14 @@ Row
 
     function onSeriesOneChanged(newX, newY, newMaxValue)
     {
-        graph.deleteOldData(graph.series1)
-        graph.setNewData(graph.series1, newX, newY, newMaxValue)
+        graph.deleteOldData(graph.exposedSeries1)
+        graph.setNewData(graph.exposedSeries1, newX, newY, newMaxValue)
         valueText.text = parseFloat(newY).toFixed(1)
     }
     function onSeriesTwoChanged(newX, newY, newMaxValue)
     {
-        graph.deleteOldData(graph.series2)
-        graph.setNewData(graph.series2, newX, newY, newMaxValue)
+        graph.deleteOldData(graph.exposedSeries2)
+        graph.setNewData(graph.exposedSeries2, newX, newY, newMaxValue)
     }
 
     Column

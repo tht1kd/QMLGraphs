@@ -18,14 +18,14 @@ Rectangle
     //////////////////////////////////////////////////////
     /// Sizing
     //////////////////////////////////////////////////////
-//    implicitHeight:
-//    implicitWidth:
+    implicitHeight: chartView.height + valueXAxisLegendLayout.height
+    implicitWidth: limitIcon.width + chartView.width + valueYAxisLegendLayout.width + 24
     //////////////////////////////////////////////////////
     /// Creation
     //////////////////////////////////////////////////////
     id: root
-//    color: "transparent"
     color: "green"
+
     function deleteOldData(series)
     {
         if(series.count >= 30)
@@ -46,15 +46,15 @@ Rectangle
         valueXAxis.min = series.at(0).x
         valueXAxis.max = series.at(series.count-1).x
         valueYAxis.max = maxData
-        axisYMaxLegend.text = (maxData).toFixed(1);
+        yAxisMaxLegend.text = (maxData).toFixed(1);
         updateXAxis(30)
     }
     function updateXAxis(newX)
     {
         var maxAxisValue = getAxisValue(newX, false);
         var midAxisValue = getAxisValue(newX, true);
-        axisMidLegend.text = midAxisValue
-        axisMaxLegend.text = maxAxisValue + getAxisUnit(midAxisValue)
+        xAxisMidLegend.text = midAxisValue
+        xAxisMaxLegend.text = maxAxisValue + getAxisUnit(midAxisValue)
     }
     function getAxisValue(newXValue, isMidpoint)
     {
@@ -66,15 +66,15 @@ Rectangle
     }
     Rectangle
     {
-        id: boundaryBox
-        border.color: "black"
+        id: boundingBox
         color: "blue"
-        width: root.width - limitIcon.width
-        height: root.height
-
+        height: root.height - valueXAxisLegendLayout.height
+        width: root.width - limitIcon.width - valueYAxisLegendLayout.width
+        x: limitIcon.width
         ChartView
         {
             id: chartView
+            anchors.fill: parent
             antialiasing: true
             backgroundRoundness: 0
             backgroundColor: "transparent"
@@ -123,41 +123,37 @@ Rectangle
             Rectangle
             {
                 id: valueXAxisLegendLayout
-//                x: chartView.plotArea.x
-                y: chartView.plotArea.y + chartView.plotArea.height + 5
+                x: chartView.plotArea.x
+                y: chartView.plotArea.y + chartView.plotArea.height + 4
                 width: chartView.plotArea.width
-                anchors.left: chartView.left
-                anchors.right: chartView.right
                 anchors.horizontalCenter: chartView.plotArea.Center
-                height: 20
+                height: Math.max(xAxisMaxLegendWrapper.height, xAxisMidLegendWrapper.height)
                 color: "red"
                 Rectangle
                 {
-                    height: parent.height
+                    id: xAxisMaxLegendWrapper
+                    height: xAxisMaxLegend.height
                     x: valueXAxisLegendLayout.x
                     anchors.left: parent.left
-                    width: 50
+                    width: xAxisMaxLegend.width
                     color: "transparent"
                     Text
                     {
-                        id: axisMaxLegend
-//                        anchors.fill: parent
-                        height: parent.height
+                        id: xAxisMaxLegend
                         horizontalAlignment: Text.AlignLeft
                     }
                 }
                 Rectangle
                 {
-                    height: parent.height
-                    width: 50
+                    id: xAxisMidLegendWrapper
+                    height: xAxisMidLegend.height
+                    width: xAxisMidLegend.width
                     x: valueXAxisLegendLayout.x + parseInt(valueXAxisLegendLayout.width/2)
                     anchors.horizontalCenter: parent.horizontalCenter
                     color: "transparent"
                     Text
                     {
-                        id: axisMidLegend
-                        anchors.fill: parent
-                        height: parent.height
+                        id: xAxisMidLegend
                         horizontalAlignment: Text.AlignHCenter
                     }
                 }
@@ -165,13 +161,12 @@ Rectangle
                 {
                     anchors.right: parent.right
                     height: parent.height
-                    width: 50
+                    width: xAxisOriginLegend.width
                     color: "transparent"
                     Text
                     {
+                        id: xAxisOriginLegend
                         text: "0"
-                        anchors.fill: parent
-                        height: parent.height
                         horizontalAlignment: Text.AlignRight
                     }
                 }
@@ -179,15 +174,10 @@ Rectangle
             Rectangle
             {
                 id: valueYAxisLegendLayout
-//                x: chartView.plotArea.x + chartView.plotArea.width + 4
-//                y: chartView.plotArea.y - 8
+                x: chartView.plotArea.x + chartView.plotArea.width + 4
+                y: chartView.plotArea.y - 4
                 width: 50
-                anchors.left: chartView.right
-                anchors.right: root.right
-                anchors.top: chartView.top
-                anchors.bottom: chartView.bottom
-                anchors.horizontalCenter: chartView.Center
-                height: boundaryBox.height
+                height: chartView.plotArea.height + 8
                 color: "red"
                 Rectangle
                 {
@@ -197,7 +187,7 @@ Rectangle
                     color: "transparent"
                     Text
                     {
-                        id: axisYMaxLegend
+                        id: yAxisMaxLegend
                         anchors.fill: parent
                         verticalAlignment: Text.AlignTop
                     }
@@ -216,23 +206,23 @@ Rectangle
                 }
             }
         }
-        Image
-        {
-            id: limitIcon
-            source: "qrc:///PFCApp/Resource_Files/Images/SpeedLimit_50x50.png"
-            anchors.verticalCenter: indicatorLine.verticalCenter
-            anchors.right: boundaryBox.left
-        }
-        Rectangle
-        {
-            id: indicatorLine
-            anchors.left: limitIcon.right
-            anchors.right: boundaryBox.right
-            anchors.top: boundaryBox.top
-            anchors.topMargin: boundaryBox.height - boundaryBox.height/1.2
-            color: "black"
-            height: 4
-        }
+    }
+    Image
+    {
+        id: limitIcon
+        source: "qrc:///PFCApp/Resource_Files/Images/SpeedLimit_50x50.png"
+        anchors.verticalCenter: indicatorLine.verticalCenter
+        anchors.left: root.left
+    }
+    Rectangle
+    {
+        id: indicatorLine
+        anchors.left: limitIcon.right
+        anchors.right: boundingBox.right
+        anchors.top: root.top
+        anchors.topMargin: root.height - root.height/1.2
+        color: "black"
+        height: 4
     }
 }
 /*##^##

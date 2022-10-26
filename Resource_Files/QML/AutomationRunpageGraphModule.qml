@@ -112,7 +112,7 @@ Rectangle
                 }
             }
         }
-        AreaGraphCompoundComponent_V2
+        AreaGraphCompoundComponent
         {
             id: brokenGrainGraph
             Layout.fillWidth: true

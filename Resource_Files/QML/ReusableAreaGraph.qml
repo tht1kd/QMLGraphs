@@ -9,12 +9,16 @@ Rectangle
     //////////////////////////////////////////////////////
     property alias backgroundDataBrush: backgroundData.brushFilename
     property alias backgroundDataColor: backgroundData.color
+    property alias backgroundDataBorderColor: backgroundData.borderColor
     property alias foregroundDataBrush: foregroundData.brushFilename
     property alias foregroundDataColor: foregroundData.color
+    property alias foregroundDataBorderColor: foregroundData.borderColor
     property alias backgroundDataName: backgroundData.name
     property alias foregroundDataName: foregroundData.name
     property alias backgroundData: backgroundData.upperSeries
     property alias foregroundData: foregroundData.upperSeries
+
+    readonly property int numberOfDataPoints: 120
     //////////////////////////////////////////////////////
     /// Sizing
     //////////////////////////////////////////////////////
@@ -24,17 +28,17 @@ Rectangle
     /// Creation
     //////////////////////////////////////////////////////
     id: root
-    color: "transparent"
+    color: "green"
 
     function deleteOldData(series)
     {
-        if(series.count >= 30)
+        if(series.count >= numberOfDataPoints)
         {
            series.remove(0);
         }
         if(series.count === 0)
         {
-            for(var index = 0; index < 30; ++index)
+            for(var index = 0; index < numberOfDataPoints; ++index)
             {
                 series.append(index,-1)
             }
@@ -42,12 +46,12 @@ Rectangle
     }
     function setNewData(series, newX, newY, maxData)
     {
-        series.append(newX+30, newY)
+        series.append(newX+numberOfDataPoints, newY)
         valueXAxis.min = series.at(0).x
         valueXAxis.max = series.at(series.count-1).x
         valueYAxis.max = maxData
         yAxisMaxLegend.text = (maxData).toFixed(1);
-        updateXAxis(30)
+        updateXAxis(numberOfDataPoints)
     }
     function updateXAxis(newX)
     {
@@ -58,7 +62,7 @@ Rectangle
     }
     function getAxisValue(newXValue, isMidpoint)
     {
-        return isMidpoint ? (newXValue >= 30 ? 15 : newXValue/2) : (newXValue >= 30 ? 30 : newXValue)
+        return isMidpoint ? numberOfDataPoints/2 : numberOfDataPoints
     }
     function getAxisUnit(newX)
     {
@@ -67,7 +71,7 @@ Rectangle
     Rectangle
     {
         id: boundingBox
-        color: "white"
+        color: "blue"
         border.color: "black"
         height: root.height - valueXAxisLegendLayout.height
         width: root.width - limitIcon.width - valueYAxisLegendLayout.width
@@ -78,7 +82,7 @@ Rectangle
             anchors.fill: parent
             antialiasing: true
             backgroundRoundness: 0
-            backgroundColor: "transparent"
+            backgroundColor: "white"
             legend.visible: false
             anchors { fill: parent; centerIn: parent; margins: -15}
             margins { right: 0; bottom: 0; left: 0; top: 0 }
@@ -129,7 +133,7 @@ Rectangle
                 width: chartView.plotArea.width
                 anchors.horizontalCenter: chartView.plotArea.Center
                 height: Math.max(xAxisMaxLegendWrapper.height, xAxisMidLegendWrapper.height)
-                color: "transparent"
+                color: "red"
                 Rectangle
                 {
                     id: xAxisMaxLegendWrapper
@@ -179,7 +183,7 @@ Rectangle
                 y: chartView.plotArea.y - 4
                 width: Math.max(yAxisMaxLegendWrapper.width, yAxisOriginLegendWrapper.width) + 8
                 height: chartView.plotArea.height + 8
-                color: "transparent"
+                color: "red"
                 Rectangle
                 {
                     id: yAxisMaxLegendWrapper
@@ -215,6 +219,7 @@ Rectangle
         source: "qrc:///PFCApp/Resource_Files/Images/SpeedLimit_50x50.png"
         anchors.top: indicatorLine.verticalCenter
         anchors.left: root.left
+        sourceSize: Qt.size(20,20)
     }
     Rectangle
     {

@@ -4,7 +4,6 @@ import QtQuick.Layouts 1.3
 Row
 {
     id: root
-
     //////////////////////////////////////////////////////
     // Properties
     //////////////////////////////////////////////////////
@@ -12,7 +11,6 @@ Row
     property alias graphSeries1Name: graph.series1Name
     property alias graphSeries2Color: graph.series2Color
     property alias graphSeries2Name: graph.series2Name
-
     //////////////////////////////////////////////////////
     /// Sizing
     //////////////////////////////////////////////////////
@@ -21,10 +19,10 @@ Row
     spacing: 8
     anchors.leftMargin: 8
     anchors.rightMargin: 8
-
     //////////////////////////////////////////////////////
     /// Functions
     //////////////////////////////////////////////////////
+
     function onSeriesOneChanged(newX, newY, newMaxValue)
     {
         graph.deleteOldData(graph.exposedSeries1)
@@ -65,6 +63,7 @@ Row
                 Image
                 {
                     source: "qrc:///PFCApp/Resource_Files/Images/SpeedLimit_50x50.png"
+                    sourceSize: Qt.size(40,40)
                 }
                 ColumnLayout
                 {
@@ -112,6 +111,7 @@ Row
                 Image
                 {
                     source: "qrc:///PFCApp/Resource_Files/Images/SpeedLimit_50x50.png"
+                    sourceSize: Qt.size(40,40)
                 }
                 ColumnLayout
                 {

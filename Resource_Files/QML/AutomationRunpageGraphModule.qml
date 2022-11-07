@@ -64,17 +64,21 @@ Rectangle
             Layout.fillWidth: true
             Layout.fillHeight: true
             Layout.minimumHeight: 100
-            Layout.maximumHeight: layout.height / 7 + (6*8)
+            Layout.preferredHeight: (root.height - productivityDivider.height - qualityDivider.height - (layout.spacing * 6)) / 6
+            Layout.maximumHeight: (root.height - productivityDivider.height - qualityDivider.height - (layout.spacing * 6)) / 6
             Layout.leftMargin: 8
             Layout.rightMargin: 8
-            graphBackgroundDataBrush: ":/PFCApp/Resource_Files/Images/graph_fill_pattern.svg"
-            backgroundDataIconLegendSource: "qrc:///PFCApp/Resource_Files/Images/SpeedLimit_50x50.png"
-            backgroundDataFillPatternLegendSource: "qrc:///PFCApp/Resource_Files/Images/graph_fill_pattern.svg"
-            foregroundDataIconLegendSource: "qrc:///PFCApp/Resource_Files/Images/SpeedLimit_50x50.png"
-            graphForegroundDataColor: "#D7D4B8"
-            graphBackgroundDataName: "MOG Light"
-            graphForegroundDataName: "MOG Heavy"
+            backgroundDataIconLegendSource: "qrc:/PFCApp/Resource_Files/Images/SpeedLimit_50x50.png"
+            graphBackgroundDataName: "Total (Separator) Loss"
+            graphBackgroundDataColor: "#D7D4B8"
+            graphBackgroundDataBorderColor: "#D7D4B8"
+            graphForegroundDataBrush: ":/PFCApp/Resource_Files/Images/graph_fill_pattern.svg"
+            graphForegroundDataName: "Shoe Loss"
+            graphForegroundDataBorderColor: "#BFBD99"
+            foregroundDataIconLegendSource: "qrc:/PFCApp/Resource_Files/Images/SpeedLimit_50x50.png"
+            foregroundDataFillPatternLegendSource: "qrc:/PFCApp/Resource_Files/Images/SpeedLimit_50x50.png"
             graphName: "Grain Loss"
+            graphIconSource: "qrc:/PFCApp/Resource_Files/Images/SpeedLimit_50x50.png"
             unitsValue: "%"
             iconLegendVisible: true
             Connections
@@ -96,12 +100,15 @@ Rectangle
             Layout.fillWidth: true
             Layout.fillHeight: true
             Layout.minimumHeight: 100
-            Layout.maximumHeight: layout.height / 7 + (6*8)
+            Layout.preferredHeight: (root.height - productivityDivider.height - qualityDivider.height - (layout.spacing * 6)) / 6
+            Layout.maximumHeight: (root.height - productivityDivider.height - qualityDivider.height - (layout.spacing * 6)) / 6
             Layout.leftMargin: 8
             Layout.rightMargin: 8
             graphForegroundDataColor: "#D7D4B8"
             graphForegroundDataName: "Foreign Material"
+            graphForegroundDataBorderColor: "#D7D4B8"
             graphName: "Foreign Material"
+            graphIconSource: "qrc:/PFCApp/Resource_Files/Images/SpeedLimit_50x50.png"
             iconLegendVisible: false
             Connections
             {
@@ -118,13 +125,16 @@ Rectangle
             Layout.fillWidth: true
             Layout.fillHeight: true
             Layout.minimumHeight: 100
-            Layout.maximumHeight: layout.height / 7 + (6*8)
+            Layout.preferredHeight: (root.height - productivityDivider.height - qualityDivider.height - (layout.spacing * 6)) / 6
+            Layout.maximumHeight: (root.height - productivityDivider.height - qualityDivider.height - (layout.spacing * 6)) / 6
             Layout.leftMargin: 8
             Layout.rightMargin: 8
             Layout.bottomMargin: 8
             graphForegroundDataColor: "#D7D4B8"
             graphForegroundDataName: "Broken Grain"
+            graphForegroundDataBorderColor: "#D7D4B8"
             graphName: "Broken Grain"
+            graphIconSource: "qrc:/PFCApp/Resource_Files/Images/SpeedLimit_50x50.png"
             iconLegendVisible: false
             Connections
             {

@@ -9,18 +9,20 @@ Item
     //////////////////////////////////////////////////////
     property alias graphBackgroundDataBrush: graph.backgroundDataBrush
     property alias graphBackgroundDataColor: graph.backgroundDataColor
+    property alias graphBackgroundDataBorderColor: graph.backgroundDataBorderColor
+    property alias graphBackgroundDataName: graph.backgroundDataName
     property alias graphForegroundDataBrush: graph.foregroundDataBrush
     property alias graphForegroundDataColor: graph.foregroundDataColor
-    property alias graphBackgroundDataName: graph.backgroundDataName
+    property alias graphForegroundDataBorderColor: graph.foregroundDataBorderColor
     property alias graphForegroundDataName: graph.foregroundDataName
     property alias dataLabelValue: valueText.text
     property alias unitsValue: unitsText.text;
     property alias graphName: graphDataName.text
     property alias iconLegendVisible: legendImagesContainer.visible
     property alias backgroundDataIconLegendSource: backgroundDataIconLegend.source
-    property alias backgroundDataFillPatternLegendSource: backgroundDataFillPatternLegend.source
     property alias foregroundDataIconLegendSource: foregroundDataIconLegend.source
-
+    property alias foregroundDataFillPatternLegendSource: foregroundDataFillPatternLegend.source
+    property alias graphIconSource: graphIcon.source
     //////////////////////////////////////////////////////
     /// Sizing
     //////////////////////////////////////////////////////
@@ -74,12 +76,12 @@ Item
                         height: parent.height
                         sourceSize: Qt.size(25, parent.height)
                     }
-                    Image
+                    Rectangle
                     {
                         id: backgroundDataFillPatternLegend
                         height: parent.height
                         width: 25
-                        sourceSize: Qt.size(25, parent.height)
+                        color: graphBackgroundDataColor
                     }
                     Image
                     {
@@ -87,12 +89,12 @@ Item
                         height: parent.height
                         sourceSize: Qt.size(25, parent.height)
                     }
-                    Rectangle
+                    Image
                     {
                         id: foregroundDataFillPatternLegend
                         height: parent.height
                         width: 25
-                        color: graphForegroundDataColor
+                        sourceSize: Qt.size(25, 25)
                     }
                 }
             }
@@ -128,8 +130,9 @@ Item
                    spacing: 8
                     Image
                     {
-                        source: "qrc:///PFCApp/Resource_Files/Images/SpeedLimit_50x50.png"
+                        id: graphIcon
                         Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+                        sourceSize: Qt.size(40,40)
                     }
                     ColumnLayout
                     {
